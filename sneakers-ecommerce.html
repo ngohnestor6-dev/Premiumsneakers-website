@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>www.sneakers.com - Premium Shoes Online Store</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f5f5f5; color: #333; }
+    .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+    
+    /* Top Header */
+    .top-header { background: #232f3e; color: white; padding: 10px 0; font-size: 13px; }
+    .top-header .container { display: flex; justify-content: space-between; }
+    .top-header a { color: #ccc; text-decoration: none; margin: 0 15px; cursor: pointer; }
+    .top-header a:hover { color: white; }
+    
+    /* Main Header */
+    header { background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+    header .container { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; }
+    
+    .header-left { display: flex; align-items: center; gap: 20px; flex: 1; }
+    .logo-section { display: flex; align-items: center; gap: 8px; cursor: pointer; transition: transform 0.3s; }
+    .logo-section:hover { transform: scale(1.05); }
+    .logo-svg { width: 45px; height: 45px; }
+    .logo-text { font-size: 18px; font-weight: 700; color: #232f3e; }
+    
+    .search-container { flex: 1; display: flex; gap: 8px; }
+    .search-container input { flex: 1; padding: 10px 12px; border: 1px solid #ccc; border-radius: 4px 0 0 4px; }
+    .search-container button { padding: 10px 16px; background: #FF6B35; color: white; border: 1px solid #FF6B35; cursor: pointer; border-radius: 0 4px 4px 0; font-weight: 500; }
+    .search-container button:hover { background: #E55A25; }
+    
+    .header-right { display: flex; gap: 20px; align-items: center; }
+    .header-link { cursor: pointer; color: #333; text-decoration: none; font-size: 14px; transition: color 0.3s; }
+    .header-link:hover { color: #FF6B35; }
+    .cart-link { position: relative; }
+    .cart-count { position: absolute; top: -8px; right: -12px; background: #FF6B35; color: white; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; }
+    
+    /* Navigation */
+    .nav-bar { background: white; border-bottom: 1px solid #ddd; }
+    .nav-bar .container { display: flex; gap: 20px; padding: 0; overflow-x: auto; }
+    .nav-btn { background: none; border: none; padding: 12px 16px; cursor: pointer; color: #333; font-size: 14px; white-space: nowrap; border-bottom: 3px solid transparent; transition: all 0.3s; }
+    .nav-btn:hover { color: #FF6B35; border-bottom-color: #FF6B35; }
+    .nav-btn.active { color: #FF6B35; border-bottom-color: #FF6B35; }
+    
+    /* Banner */
+    .banner { background: linear-gradient(135deg, #232f3e 0%, #FF6B35 100%); color: white; padding: 60px 20px; text-align: center; margin-bottom: 30px; }
+    .banner h1 { font-size: 36px; margin-bottom: 10px; }
+    .banner p { font-size: 16px; opacity: 0.9; }
+    
+    /* Products Grid */
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin-bottom: 40px; }
+    .product-card { background: white; border: 1px solid #ddd; border-radius: 4px; overflow: hidden; transition: all 0.3s; cursor: pointer; }
+    .product-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); transform: translateY(-2px); }
+    
+    .product-image { width: 100%; height: 220px; background-size: cover; background-position: center; position: relative; }
+    .product-badge { position: absolute; top: 10px; right: 10px; background: #FF6B35; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+    
+    .product-info { padding: 12px; }
+    .product-brand { font-size: 12px; color: #999; margin-bottom: 4px; }
+    .product-name { font-size: 14px; font-weight: 500; margin-bottom: 8px; color: #333; line-height: 1.4; }
+    .product-rating { font-size: 12px; color: #ffc107; margin-bottom: 8px; }
+    .product-price { font-size: 18px; font-weight: 700; color: #FF6B35; margin-bottom: 8px; }
+    .product-actions { display: flex; gap: 8px; }
+    .btn { padding: 8px 12px; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 600; transition: all 0.3s; }
+    .btn-primary { background: #FF6B35; color: white; flex: 1; }
+    .btn-primary:hover { background: #E55A25; }
+    .btn-secondary { background: #e9ecef; color: #333; width: 40px; }
+    .btn-secondary:hover { background: #dee2e6; }
+    
+    /* Filters Sidebar */
+    .filters-section { display: grid; grid-template-columns: 250px 1fr; gap: 20px; margin-bottom: 40px; }
+    .filters { background: white; padding: 20px; border-radius: 4px; height: fit-content; }
+    .filter-group { margin-bottom: 24px; }
+    .filter-title { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+    .filter-option { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer; }
+    .filter-option input { cursor: pointer; }
+    .filter-option label { font-size: 13px; cursor: pointer; }
+    
+    /* Sidebar */
+    .sidebar-content { background: white; padding: 20px; border-radius: 4px; }
+    
+    /* Pagination */
+    .pagination { display: flex; gap: 8px; justify-content: center; margin-top: 30px; }
+    .pagination button { padding: 8px 12px; border: 1px solid #ddd; background: white; cursor: pointer; border-radius: 4px; }
+    .pagination button.active { background: #FF6B35; color: white; border-color: #FF6B35; }
+    .pagination button:hover { border-color: #FF6B35; }
+    
+    /* Modal */
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; }
+    .modal.active { display: flex; }
+    .modal-content { background: white; padding: 40px; border-radius: 8px; max-width: 800px; width: 90%; max-height: 90vh; overflow-y: auto; }
+    .modal-close { position: absolute; top: 15px; right: 20px; font-size: 28px; cursor: pointer; }
+    
+    /* Product Detail */
+    .product-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .detail-image { width: 100%; height: 500px; background-size: cover; background-position: center; border-radius: 4px; }
+    .detail-info h1 { font-size: 28px; margin-bottom: 12px; }
+    .detail-rating { font-size: 14px; color: #ffc107; margin-bottom: 12px; }
+    .detail-price { font-size: 32px; font-weight: 700; color: #FF6B35; margin-bottom: 20px; }
+    .detail-options { margin-bottom: 20px; }
+    .option-group { margin-bottom: 16px; }
+    .option-label { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+    .option-values { display: flex; gap: 8px; flex-wrap: wrap; }
+    .option-value { padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; cursor: pointer; transition: all 0.3s; }
+    .option-value:hover { border-color: #FF6B35; }
+    .option-value.selected { background: #FF6B35; color: white; border-color: #FF6B35; }
+    
+    /* Cart */
+    .cart-table { width: 100%; border-collapse: collapse; }
+    .cart-table th { background: #f5f5f5; padding: 12px; text-align: left; font-weight: 600; border-bottom: 2px solid #ddd; }
+    .cart-table td { padding: 12px; border-bottom: 1px solid #ddd; }
+    .cart-summary { background: white; padding: 20px; border-radius: 4px; max-width: 400px; }
+    .summary-row { display: flex; justify-content: space-between; margin-bottom: 12px; }
+    .summary-row.total { font-size: 18px; font-weight: 700; border-top: 2px solid #ddd; padding-top: 12px; color: #FF6B35; }
+    
+    /* Footer */
+    footer { background: #232f3e; color: white; padding: 40px 20px; margin-top: 60px; }
+    .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; max-width: 1400px; margin: 0 auto; }
+    .footer-section h3 { margin-bottom: 15px; font-size: 14px; }
+    .footer-section a { display: block; color: #ccc; text-decoration: none; font-size: 12px; margin-bottom: 8px; cursor: pointer; transition: color 0.3s; }
+    .footer-section a:hover { color: #FF6B35; }
+    
+    /* Utilities */
+    .hidden { display: none; }
+    .text-center { text-align: center; }
+    .mt-30 { margin-top: 30px; }
+    .mb-20 { margin-bottom: 20px; }
+    .flex { display: flex; }
+    .gap-10 { gap: 10px; }
+
+    @media (max-width: 768px) {
+      .product-detail-grid { grid-template-columns: 1fr; }
+      .filters-section { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .search-container { display: none; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* Admin Styles */
+    .admin-panel { display: grid; grid-template-columns: 250px 1fr; gap: 20px; }
+    .admin-sidebar { background: #232f3e; color: white; padding: 20px; border-radius: 4px; height: fit-content; }
+    .admin-sidebar-item { padding: 12px 16px; cursor: pointer; border-radius: 4px; margin-bottom: 8px; transition: all 0.3s; }
+    .admin-sidebar-item:hover { background: #FF6B35; }
+    .admin-sidebar-item.active { background: #FF6B35; }
+    .admin-content { background: white; padding: 20px; border-radius: 4px; }
+    
+    .product-table { width: 100%; border-collapse: collapse; }
+    .product-table th { background: #f5f5f5; padding: 12px; text-align: left; font-weight: 600; border-bottom: 2px solid #ddd; }
+    .product-table td { padding: 12px; border-bottom: 1px solid #ddd; }
+    .product-table button { margin: 0 4px; }
+    
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; margin-bottom: 4px; font-weight: 600; }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; }
+    .form-group textarea { min-height: 100px; resize: vertical; }
+    
+    /* Chat Styles */
+    .chat-container { position: fixed; bottom: 20px; right: 20px; width: 350px; height: 500px; background: white; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.15); z-index: 2000; display: flex; flex-direction: column; }
+    .chat-header { background: #FF6B35; color: white; padding: 16px; border-radius: 8px 8px 0 0; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+    .chat-close { cursor: pointer; font-size: 20px; }
+    .chat-messages { flex: 1; overflow-y: auto; padding: 16px; }
+    .chat-message { margin-bottom: 12px; }
+    .chat-message.user { text-align: right; }
+    .chat-message-content { display: inline-block; max-width: 80%; padding: 10px 12px; border-radius: 8px; word-wrap: break-word; }
+    .chat-message.user .chat-message-content { background: #FF6B35; color: white; }
+    .chat-message.admin .chat-message-content { background: #f0f0f0; color: #333; }
+    .chat-input { display: flex; gap: 8px; padding: 12px; border-top: 1px solid #ddd; }
+    .chat-input input { flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+    .chat-input button { padding: 8px 12px; background: #FF6B35; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    
+    .chat-toggle { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: #FF6B35; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 1999; border: none; }
+    .chat-toggle:hover { background: #E55A25; }
+    .unread-badge { position: absolute; top: -5px; right: -5px; background: #ff0000; color: white; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; }
+    .chat-widget { position: fixed; z-index: 1999; }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script>
+    // Product Database with Images
+    const BRANDS = {
+      'Nike': {
+        name: 'Nike Air Max',
+        models: ['Air Max 90', 'Air Max 95', 'Air Max 270', 'Air Max Plus', 'Air Max 97', 'Air Max Penny'],
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop'
+      },
+      'Adidas': {
+        name: 'Adidas Ultraboost',
+        models: ['Ultraboost 21', 'Ultraboost 22', 'Ultraboost 23', 'NMD R1', 'ZX500', 'Stan Smith'],
+        image: 'https://images.unsplash.com/photo-1552962331-bbf73e559b1a?w=400&h=400&fit=crop'
+      },
+      'NewBalance': {
+        name: 'New Balance 990',
+        models: ['990v5', '990v6', '992', '993', '996', '997'],
+        image: 'https://images.unsplash.com/photo-1514306688772-aaf8a69e5985?w=400&h=400&fit=crop'
+      },
+      'Jordan': {
+        name: 'Air Jordan Retro',
+        models: ['AJ1', 'AJ3', 'AJ5', 'AJ11', 'AJ13', 'AJ20'],
+        image: 'https://images.unsplash.com/photo-1495869142454-87a888221fca?w=400&h=400&fit=crop'
+      },
+      'Puma': {
+        name: 'Puma RS-X',
+        models: ['RS-X Turns', 'RS-X', 'Suede', 'Future', 'BMW', 'Clyde'],
+        image: 'https://images.unsplash.com/photo-1532989961699-ace8666dc341?w=400&h=400&fit=crop'
+      },
+      'Reebok': {
+        name: 'Reebok Classic',
+        models: ['Club C', 'Workout', 'Freestyle', 'Rapide', 'GL 2620', 'Instapump'],
+        image: 'https://images.unsplash.com/photo-1517345872862-e4248ae1960f?w=400&h=400&fit=crop'
+      },
+      'Vans': {
+        name: 'Vans Old Skool',
+        models: ['Old Skool', 'Authentic', 'Era', 'Sk8-Hi', 'Slip-On', 'Comfycush'],
+        image: 'https://images.unsplash.com/photo-1539038118640-fcc51d9e81e0?w=400&h=400&fit=crop'
+      },
+      'Converse': {
+        name: 'Converse Chuck Taylor',
+        models: ['Chuck Taylor', 'Chuck 70', 'Jack Purcell', 'One Star', 'Run Star', 'Go-To'],
+        image: 'https://images.unsplash.com/photo-1500090736666-71f77b3b93ff?w=400&h=400&fit=crop'
+      },
+      'Timberland': {
+        name: 'Timberland 6-Inch',
+        models: ['6-Inch Premium', 'Euro Hiker', 'Lincoln Peak', 'Graydon Chelsea', 'Killington', 'TideLand'],
+        image: 'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=400&h=400&fit=crop'
+      },
+      'Skechers': {
+        name: 'Skechers Go Walk',
+        models: ['Go Walk 5', 'Go Walk 6', 'Go Run', 'Summits', 'D\'Lites', 'Flex Appeal'],
+        image: 'https://images.unsplash.com/photo-1579338559194-9b9d7f23d363?w=400&h=400&fit=crop'
+      }
+    };
+
+    // Expand products with images
+    const PRODUCTS = [];
+    let productId = 1;
+    Object.entries(BRANDS).forEach(([key, brand]) => {
+      const genders = ['Men', 'Women', 'Kids'];
+      const categories = ['Running', 'Basketball', 'Casual', 'Formal', 'Trail', 'Sport'];
+      
+      brand.models.forEach((model, idx) => {
+        const gender = genders[idx % genders.length];
+        const category = categories[idx % categories.length];
+        PRODUCTS.push({
+          id: productId++,
+          brand: key,
+          name: `${brand.name} ${model}`,
+          model: model,
+          price: (79.99 + Math.random() * 120).toFixed(2),
+          image: brand.image,
+          rating: (3.5 + Math.random() * 1.5).toFixed(1),
+          reviews: Math.floor(50 + Math.random() * 450),
+          gender: gender,
+          category: category,
+          sizes: [6, 7, 8, 9, 10, 11, 12, 13, 14],
+          colors: ['Black', 'White', 'Red', 'Blue', 'Gray'],
+          description: `Premium ${brand.name} ${model} designed for comfort and style. Features latest technology for optimal performance.`,
+          inStock: true,
+          badge: Math.random() > 0.7 ? 'New' : (Math.random() > 0.6 ? 'Sale' : null)
+        });
+      });
+    });
+
+    const REVIEWS_DATA = [
+      { author: 'John Smith', rating: 5, text: 'Amazing quality and super comfortable!', verified: true },
+      { author: 'Sarah Johnson', rating: 5, text: 'Great fit, fast shipping, highly recommend', verified: true },
+      { author: 'Mike Chen', rating: 4, text: 'Good shoes, took 2 weeks to deliver', verified: true },
+      { author: 'Emma Davis', rating: 5, text: 'Best purchase ever, worth every penny', verified: true },
+      { author: 'Alex Wilson', rating: 4, text: 'Quality is good but slightly tight fit', verified: false }
+    ];
+
+    let state = {
+      page: 'home',
+      cart: [],
+      wishlist: [],
+      filters: {
+        gender: 'all',
+        category: 'all',
+        priceRange: [0, 300],
+        brand: 'all'
+      },
+      user: null,
+      admin: null,
+      orders: [],
+      messages: [],
+      chatOpen: false,
+      adminChatOpen: false
+    };
+
+    function init() {
+      render();
+    }
+
+    function render() {
+      const app = document.getElementById('app');
+      app.innerHTML = getHeader() + getNavigation() + getPageContent() + getFooter() + getChatWidget();
+      attachEventListeners();
+    }
+
+    function getChatWidget() {
+      if (state.page === 'admin' || state.page === 'admin-products' || state.page === 'admin-orders' || state.page === 'admin-chat') {
+        return ''; // Don't show customer chat on admin pages
+      }
+      
+      return `
+        <div class="chat-widget">
+          ${!state.chatOpen ? `
+            <button class="chat-toggle" onclick="toggleChat()">
+              💬 Chat Support
+              ${state.messages.length > 0 ? '<span class="unread-badge">!</span>' : ''}
+            </button>
+          ` : `
+            <div class="chat-container" style="width: 350px; height: 500px; position: fixed; bottom: 20px; right: 20px; background: white; border-radius: 8px; box-shadow: 0 5px 30px rgba(0,0,0,0.3); display: flex; flex-direction: column; z-index: 1000;">
+              <div class="chat-header" style="background: #FF6B35; color: white; padding: 16px; border-radius: 8px 8px 0 0; display: flex; justify-content: space-between; align-items: center;">
+                <h4 style="margin: 0;">Customer Support</h4>
+                <button onclick="toggleChat()" style="background: none; border: none; color: white; cursor: pointer; font-size: 20px;">×</button>
+              </div>
+              <div class="chat-messages" style="flex: 1; overflow-y: auto; padding: 16px; background: #f5f5f5;">
+                ${state.messages.length > 0 ? state.messages[state.messages.length - 1].messages.map(m => `
+                  <div style="margin-bottom: 12px; text-align: ${m.sender === 'admin' ? 'left' : 'right'};">
+                    <div style="display: inline-block; max-width: 80%; padding: 10px 12px; border-radius: 8px; background: ${m.sender === 'admin' ? '#FF6B35' : '#e0e0e0'}; color: ${m.sender === 'admin' ? 'white' : '#333'}; word-wrap: break-word;">
+                      ${m.text}
+                    </div>
+                    <div style="font-size: 11px; color: #999; margin-top: 4px;">${m.time || ''}</div>
+                  </div>
+                `).join('') : '<p style="text-align: center; color: #999; margin-top: 20px;">Start a conversation...</p>'}
+              </div>
+              <div style="display: flex; gap: 8px; padding: 12px; border-top: 1px solid #ddd; background: white; border-radius: 0 0 8px 8px;">
+                <input type="text" id="chatInput" placeholder="Type your message..." style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                <button class="btn btn-primary" style="padding: 8px 12px; border-radius: 4px;" onclick="sendChatMessage()">Send</button>
+              </div>
+            </div>
+          `}
+        </div>
+      `;
+    }
+
+    function toggleChat() {
+      state.chatOpen = !state.chatOpen;
+      render();
+    }
+
+    function sendChatMessage() {
+      const msg = document.getElementById('chatInput')?.value;
+      if (!msg) return;
+
+      if (state.messages.length === 0) {
+        state.messages.push({
+          user: 'Customer',
+          email: 'customer@example.com',
+          messages: []
+        });
+      }
+
+      const lastConv = state.messages[state.messages.length - 1];
+      lastConv.messages.push({
+        sender: 'customer',
+        text: msg,
+        time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+      });
+
+      document.getElementById('chatInput').value = '';
+      
+      // Simulate admin response after 2 seconds
+      setTimeout(() => {
+        if (state.messages.length > 0) {
+          const conv = state.messages[state.messages.length - 1];
+          conv.messages.push({
+            sender: 'admin',
+            text: '👋 Thanks for contacting support. Our team will assist you shortly!',
+            time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+          });
+          render();
+        }
+      }, 2000);
+
+      render();
+    }
+
+    function getHeader() {
+      return `
+        <div class="top-header">
+          <div class="container">
+            <div>
+              <a onclick="openModal('contact')">Contact Us: +237 672 996 820</a>
+              <a onclick="openModal('tracking')">Track Orders</a>
+            </div>
+            <div>
+              <a onclick="setState({page: 'Returns'})">Returns & Exchanges</a>
+              <a onclick="openModal('help')">Help</a>
+              <a onclick="setState({page: 'account'})">${state.user ? 'My Account' : 'Sign In'}</a>
+            </div>
+          </div>
+        </div>
+        <header>
+          <div class="container">
+            <div class="header-left">
+              <div class="logo-section" onclick="setState({page: 'home'})">
+                <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" style="stop-color:#FF6B35;stop-opacity:1" />
+                      <stop offset="100%" style="stop-color:#E55A25;stop-opacity:1" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M 20 65 Q 30 70 50 72 Q 70 70 80 65" fill="none" stroke="url(#logoGradient)" stroke-width="2.5" stroke-linecap="round"/>
+                  <path d="M 25 65 Q 25 45 35 35 Q 50 25 65 35 Q 75 45 75 65" fill="url(#logoGradient)" opacity="0.9"/>
+                  <path d="M 30 50 Q 50 40 70 50" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                  <line x1="40" y1="50" x2="40" y2="62" stroke="white" stroke-width="1"/>
+                  <line x1="50" y1="48" x2="50" y2="64" stroke="white" stroke-width="1"/>
+                  <line x1="60" y1="50" x2="60" y2="62" stroke="white" stroke-width="1"/>
+                </svg>
+                <span class="logo-text">sneakers.com</span>
+              </div>
+              <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search shoes, brands...">
+                <button onclick="searchProducts()">Search</button>
+              </div>
+            </div>
+            <div class="header-right">
+              <a class="header-link" onclick="setState({page: 'account'})">👤 ${state.user ? state.user.name : 'Account'}</a>
+              <a class="header-link cart-link" onclick="setState({page: 'cart'})">
+                🛒 Cart
+                ${state.cart.length > 0 ? `<span class="cart-count">${state.cart.length}</span>` : ''}
+              </a>
+              <a class="header-link" onclick="setState({page: 'wishlist'})">❤️ Wishlist (${state.wishlist.length})</a>
+              <a class="header-link" style="background: #FF6B35; color: white; padding: 6px 12px; border-radius: 4px;" onclick="setState({page: 'admin'})">📊 Admin</a>
+            </div>
+          </div>
+        </header>
+      `;
+    }
+
+    function getNavigation() {
+      return `
+        <div class="nav-bar">
+          <div class="container">
+            <button class="nav-btn ${state.page === 'home' ? 'active' : ''}" onclick="setState({page: 'home'})">Home</button>
+            <button class="nav-btn ${state.page === 'shop' ? 'active' : ''}" onclick="setState({page: 'shop'})">Shop All</button>
+            <button class="nav-btn" onclick="setFilter('gender', 'Men')">👨 Men</button>
+            <button class="nav-btn" onclick="setFilter('gender', 'Women')">👩 Women</button>
+            <button class="nav-btn" onclick="setFilter('gender', 'Kids')">👶 Kids</button>
+            <button class="nav-btn" onclick="setFilter('category', 'Running')">🏃 Running</button>
+            <button class="nav-btn" onclick="setFilter('category', 'Basketball')">🏀 Basketball</button>
+            <button class="nav-btn" onclick="setFilter('category', 'Casual')">👟 Casual</button>
+            <button class="nav-btn ${state.page === 'deals' ? 'active' : ''}" onclick="setState({page: 'deals'})">🔥 Deals</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function getPageContent() {
+      if (state.page === 'home') return getHomePage();
+      if (state.page === 'shop') return getShopPage();
+      if (state.page === 'product') return getProductPage();
+      if (state.page === 'cart') return getCartPage();
+      if (state.page === 'checkout') return getCheckoutPage();
+      if (state.page === 'account') return getAccountPage();
+      if (state.page === 'wishlist') return getWishlistPage();
+      if (state.page === 'deals') return getDealsPage();
+      if (state.page === 'about') return getAboutPage();
+      if (state.page === 'admin') return getAdminPage();
+      if (state.page === 'admin-products') return getAdminProductsPage();
+      if (state.page === 'admin-orders') return getAdminOrdersPage();
+      if (state.page === 'admin-chat') return getAdminChatPage();
+      return '<div class="container"><h2>Page not found</h2></div>';
+    }
+
+    // ADMIN PAGES
+    function getAdminPage() {
+      if (!state.admin) {
+        return `
+          <div class="container" style="max-width: 400px; margin-top: 60px;">
+            <div style="background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+              <h2 style="text-align: center; margin-bottom: 30px;">Admin Login</h2>
+              <div style="margin-bottom: 16px;">
+                <label style="display: block; margin-bottom: 8px; font-weight: 600;">Username</label>
+                <input type="text" id="adminUsername" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+              </div>
+              <div style="margin-bottom: 16px;">
+                <label style="display: block; margin-bottom: 8px; font-weight: 600;">Password</label>
+                <input type="password" id="adminPassword" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+              </div>
+              <button class="btn btn-primary" style="width: 100%; padding: 12px;" onclick="adminLogin()">Login</button>
+            </div>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="admin-panel">
+          <div class="admin-sidebar">
+            <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.2);">
+              <h3>Admin Panel</h3>
+              <p style="font-size: 12px; opacity: 0.8;">Welcome, ${state.admin.name}</p>
+            </div>
+            <div class="admin-sidebar-item ${state.page === 'admin' ? 'active' : ''}" onclick="setState({page: 'admin'})">📊 Dashboard</div>
+            <div class="admin-sidebar-item ${state.page === 'admin-products' ? 'active' : ''}" onclick="setState({page: 'admin-products'})">📦 Products</div>
+            <div class="admin-sidebar-item ${state.page === 'admin-orders' ? 'active' : ''}" onclick="setState({page: 'admin-orders'})">📋 Orders</div>
+            <div class="admin-sidebar-item ${state.page === 'admin-chat' ? 'active' : ''}" onclick="setState({page: 'admin-chat'})">💬 Messages</div>
+            <div class="admin-sidebar-item" style="margin-top: 20px;" onclick="adminLogout()">🚪 Logout</div>
+          </div>
+          <div class="admin-content">
+            <h2>Dashboard Overview</h2>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 20px;">
+              <div style="background: linear-gradient(135deg, #FF6B35 0%, #E55A25 100%); color: white; padding: 20px; border-radius: 8px; text-align: center;">
+                <div style="font-size: 32px; font-weight: 700;">${PRODUCTS.length}</div>
+                <div style="font-size: 12px; opacity: 0.9;">Total Products</div>
+              </div>
+              <div style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white; padding: 20px; border-radius: 8px; text-align: center;">
+                <div style="font-size: 32px; font-weight: 700;">${state.orders.length}</div>
+                <div style="font-size: 12px; opacity: 0.9;">Total Orders</div>
+              </div>
+              <div style="background: linear-gradient(135deg, #2196F3 0%, #0b7dda 100%); color: white; padding: 20px; border-radius: 8px; text-align: center;">
+                <div style="font-size: 32px; font-weight: 700;">$${state.orders.reduce((sum, o) => sum + o.total, 0).toFixed(0)}</div>
+                <div style="font-size: 12px; opacity: 0.9;">Revenue</div>
+              </div>
+              <div style="background: linear-gradient(135deg, #FFC107 0%, #FF9800 100%); color: white; padding: 20px; border-radius: 8px; text-align: center;">
+                <div style="font-size: 32px; font-weight: 700;">${state.messages.length}</div>
+                <div style="font-size: 12px; opacity: 0.9;">Messages</div>
+              </div>
+            </div>
+            <div style="margin-top: 30px;">
+              <h3>Recent Orders</h3>
+              <table class="product-table" style="margin-top: 16px;">
+                <thead>
+                  <tr><th>Order ID</th><th>Date</th><th>Items</th><th>Total</th><th>Status</th></tr>
+                </thead>
+                <tbody>
+                  ${state.orders.slice(-5).map(o => `
+                    <tr>
+                      <td><strong>${o.id}</strong></td>
+                      <td>${o.date}</td>
+                      <td>${o.items}</td>
+                      <td>$${o.total.toFixed(2)}</td>
+                      <td><span style="background: #4CAF50; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">${o.status}</span></td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function getAdminProductsPage() {
+      if (!state.admin) return getAdminPage();
+      
+      return `
+        <div class="admin-panel">
+          <div class="admin-sidebar">
+            <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.2);">
+              <h3>Admin Panel</h3>
+              <p style="font-size: 12px; opacity: 0.8;">Welcome, ${state.admin.name}</p>
+            </div>
+            <div class="admin-sidebar-item" onclick="setState({page: 'admin'})">📊 Dashboard</div>
+            <div class="admin-sidebar-item active" onclick="setState({page: 'admin-products'})">📦 Products</div>
+            <div class="admin-sidebar-item" onclick="setState({page: 'admin-orders'})">📋 Orders</div>
+            <div class="admin-sidebar-item" onclick="setState({page: 'admin-chat'})">💬 Messages</div>
+            <div class="admin-sidebar-item" style="margin-top: 20px;" onclick="adminLogout()">🚪 Logout</div>
+          </div>
+          <div class="admin-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+              <h2>Product Management</h2>
+              <button class="btn btn-primary" onclick="openModal('add-product')">+ Add New Product</button>
+            </div>
+            <table class="product-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Brand</th>
+                  <th>Price</th>
+                  <th>Stock</th>
+                  <th>Category</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${PRODUCTS.slice(0, 10).map(p => `
+                  <tr>
+                    <td>${p.id}</td>
+                    <td>${p.name.substring(0, 30)}...</td>
+                    <td>${p.brand}</td>
+                    <td>$${p.price}</td>
+                    <td>In Stock</td>
+                    <td>${p.category}</td>
+                    <td>
+                      <button class="btn btn-secondary" onclick="editProduct(${p.id})">Edit</button>
+                      <button class="btn btn-secondary" style="background: #ff6b6b;" onclick="deleteProduct(${p.id})">Delete</button>
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+            <p style="margin-top: 20px; color: #666;">Showing 10 of ${PRODUCTS.length} products</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function getAdminOrdersPage() {
+      if (!state.admin) return getAdminPage();
+      
+      return `
+        <div class="admin-panel">
+          <div class="admin-sidebar">
+            <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.2);">
+              <h3>Admin Panel</h3>
+              <p style="font-size: 12px; opacity: 0.8;">Welcome, ${state.admin.name}</p>
+            </div>
+            <div class="admin-sidebar-item" onclick="setState({page: 'admin'})">📊 Dashboard</div>
+            <div class="admin-sidebar-item" onclick="setState({page: 'admin-products'})">📦 Products</div>
+            <div class="admin-sidebar-item active" onclick="setState({page: 'admin-orders'})">📋 Orders</div>
+            <div class="admin-sidebar-item" onclick="setState({page: 'admin-chat'})">💬 Messages</div>
+            <div class="admin-sidebar-item" style="margin-top: 20px;" onclick="adminLogout()">🚪 Logout</div>
+          </div>
+          <div class="admin-content">
+            <h2>Order Management</h2>
+            <table class="product-table" style="margin-top: 20px;">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Date</th>
+                  <th>Items</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${state.orders.map(o => `
+                  <tr>
+                    <td><strong>${o.id}</strong></td>
+                    <td>${o.date}</td>
+                    <td>${o.items}</td>
+                    <td>$${o.total.toFixed(2)}</td>
+                    <td style="text-align: center;">
+                      <span style="background: #4CAF50; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">${o.status}</span>
+                    </td>
+                    <td>
+                      <button class="btn btn-secondary" onclick="viewOrderDetails('${o.id}')">View</button>
+                      <button class="btn btn-secondary" onclick="updateOrderStatus('${o.id}')">Update</button>
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+            ${state.orders.length === 0 ? '<p style="margin-top: 20px; color: #666;">No orders yet</p>' : ''}
+          </div>
+        </div>
+      `;
+    }
+
+    function getAdminChatPage() {
+      if (!state.admin) return getAdminPage();
+      
+      return `
+        <div class="admin-panel">
+          <div class="admin-sidebar">
+            <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.2);">
+              <h3>Admin Panel</h3>
+              <p style="font-size: 12px; opacity: 0.8;">Welcome, ${state.admin.name}</p>
+            </div>
+            <div class="admin-sidebar-item" onclick="setState({page: 'admin'})">📊 Dashboard</div>
+            <div class="admin-sidebar-item" onclick="setState({page: 'admin-products'})">📦 Products</div>
+            <div class="admin-sidebar-item" onclick="setState({page: 'admin-orders'})">📋 Orders</div>
+            <div class="admin-sidebar-item active" onclick="setState({page: 'admin-chat'})">💬 Messages</div>
+            <div class="admin-sidebar-item" style="margin-top: 20px;" onclick="adminLogout()">🚪 Logout</div>
+          </div>
+          <div class="admin-content">
+            <h2>Customer Messages</h2>
+            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 20px; margin-top: 20px; height: 500px;">
+              <div style="border-right: 1px solid #ddd; overflow-y: auto;">
+                <div style="font-weight: 600; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #ddd;">Conversations</div>
+                ${state.messages.slice(-5).map((msg, i) => `
+                  <div style="padding: 12px; border-bottom: 1px solid #eee; cursor: pointer; background: ${i === state.messages.length - 1 ? '#f0f0f0' : 'white'};" onclick="selectConversation(${i})">
+                    <div style="font-weight: 600; font-size: 13px;">${msg.user}</div>
+                    <div style="font-size: 12px; color: #666;">${msg.messages[0].text.substring(0, 40)}...</div>
+                  </div>
+                `).join('')}
+              </div>
+              <div style="background: #f9f9f9; border-radius: 4px; display: flex; flex-direction: column;">
+                <div style="flex: 1; overflow-y: auto; padding: 16px;">
+                  ${state.messages.length > 0 ? state.messages[state.messages.length - 1].messages.map(m => `
+                    <div style="margin-bottom: 12px; text-align: ${m.sender === 'admin' ? 'right' : 'left'};">
+                      <div style="display: inline-block; max-width: 70%; padding: 10px 12px; border-radius: 8px; background: ${m.sender === 'admin' ? '#FF6B35' : '#ddd'}; color: ${m.sender === 'admin' ? 'white' : '#333'};">
+                        ${m.text}
+                      </div>
+                    </div>
+                  `).join('') : '<p style="color: #999; text-align: center;">No messages</p>'}
+                </div>
+                <div style="display: flex; gap: 8px; padding: 12px; border-top: 1px solid #ddd;">
+                  <input type="text" id="adminReply" placeholder="Type your reply..." style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                  <button class="btn btn-primary" style="padding: 8px 16px;" onclick="sendAdminMessage()">Send</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function getHomePage() {
+      const featured = PRODUCTS.filter(p => p.badge === 'New').slice(0, 8);
+      const bestsellers = PRODUCTS.sort(() => Math.random() - 0.5).slice(0, 8);
+      
+      return `
+        <div class="banner">
+          <h1>Welcome to www.sneakers.com</h1>
+          <p>Discover Premium Shoes for Every Style & Season | Free Shipping on Orders $100+</p>
+        </div>
+        <div class="container">
+          <h2 class="mb-20">🆕 New Arrivals</h2>
+          <div class="products-grid">
+            ${featured.map(p => getProductCard(p)).join('')}
+          </div>
+          
+          <h2 class="mb-20" style="margin-top: 40px;">⭐ Best Sellers</h2>
+          <div class="products-grid">
+            ${bestsellers.map(p => getProductCard(p)).join('')}
+          </div>
+
+          <div class="sidebar-content" style="margin-top: 40px;">
+            <h3>📧 Newsletter</h3>
+            <p style="margin-bottom: 12px; color: #666;">Get exclusive deals and updates</p>
+            <div style="display: flex; gap: 8px;">
+              <input type="email" placeholder="Enter your email" style="flex: 1; padding: 10px; border: 1px solid #ddd;" id="newsletterEmail">
+              <button class="btn btn-primary" onclick="subscribeNewsletter()" style="width: auto;">Subscribe</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function getShopPage() {
+      const filtered = filterProducts();
+      return `
+        <div class="container">
+          <div class="filters-section">
+            <div class="filters">
+              <div class="filter-group">
+                <div class="filter-title">Gender</div>
+                <div class="filter-option">
+                  <input type="radio" name="gender" value="all" ${state.filters.gender === 'all' ? 'checked' : ''} onchange="setFilter('gender', 'all')">
+                  <label>All</label>
+                </div>
+                <div class="filter-option">
+                  <input type="radio" name="gender" value="Men" ${state.filters.gender === 'Men' ? 'checked' : ''} onchange="setFilter('gender', 'Men')">
+                  <label>👨 Men</label>
+                </div>
+                <div class="filter-option">
+                  <input type="radio" name="gender" value="Women" ${state.filters.gender === 'Women' ? 'checked' : ''} onchange="setFilter('gender', 'Women')">
+                  <label>👩 Women</label>
+                </div>
+                <div class="filter-option">
+                  <input type="radio" name="gender" value="Kids" ${state.filters.gender === 'Kids' ? 'checked' : ''} onchange="setFilter('gender', 'Kids')">
+                  <label>👶 Kids</label>
+                </div>
+              </div>
+
+              <div class="filter-group">
+                <div class="filter-title">Category</div>
+                ${['all', 'Running', 'Basketball', 'Casual', 'Formal', 'Trail', 'Sport'].map(cat => `
+                  <div class="filter-option">
+                    <input type="radio" name="category" value="${cat}" ${state.filters.category === cat ? 'checked' : ''} onchange="setFilter('category', '${cat}')">
+                    <label>${cat === 'all' ? 'All Categories' : cat}</label>
+                  </div>
+                `).join('')}
+              </div>
+
+              <div class="filter-group">
+                <div class="filter-title">Price Range</div>
+                <input type="range" min="0" max="300" value="${state.filters.priceRange[1]}" 
+                  onchange="setFilter('price', [0, this.value])" style="width: 100%;">
+                <div style="margin-top: 8px; font-size: 13px;">Estimated: $${state.filters.priceRange[0]} - $${state.filters.priceRange[1]}</div>
+              </div>
+
+              <div class="filter-group">
+                <div class="filter-title">Brand</div>
+                ${Object.keys(BRANDS).map(brand => `
+                  <div class="filter-option">
+                    <input type="radio" name="brand" value="${brand === 'NewBalance' ? 'NewBalance' : brand}" ${state.filters.brand === brand ? 'checked' : ''} onchange="setFilter('brand', '${brand}')">
+                    <label>${BRANDS[brand].name.split(' ')[0]}</label>
+                  </div>
+                `).join('')}
+              </div>
+
+              <button class="btn btn-primary" style="width: 100%; margin-top: 20px;" onclick="resetFilters()">Reset Filters</button>
+            </div>
+
+            <div>
+              <div style="background: white; padding: 16px; border-radius: 4px; margin-bottom: 20px;">
+                <p style="margin-bottom: 12px;">Showing ${filtered.length} products</p>
+                <select onchange="sortProducts(this.value)" style="width: 100%; padding: 8px; border: 1px solid #ddd;">
+                  <option value="">Sort by: Featured</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                  <option value="rating">Highest Rated</option>
+                  <option value="newest">Newest First</option>
+                </select>
+              </div>
+              
+              <div class="products-grid">
+                ${filtered.slice(0, 24).map(p => getProductCard(p)).join('')}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function getProductPage() {
+      // Implementation placeholder - shows in modal
+      return '<div class="container"><p>Product details shown in modal</p></div>';
+    }
+
+    function getCartPage() {
+      if (state.cart.length === 0) {
+        return `
+          <div class="container">
+            <div class="text-center" style="padding: 60px 20px;">
+              <h2 style="margin-bottom: 20px;">Your cart is empty</h2>
+              <p style="color: #666; margin-bottom: 20px;">Start shopping and add items to your cart</p>
+              <button class="btn btn-primary" onclick="setState({page: 'shop'})">Continue Shopping</button>
+            </div>
+          </div>
+        `;
+      }
+
+      const total = state.cart.reduce((sum, item) => sum + (parseFloat(item.price) * item.qty), 0).toFixed(2);
+      
+      return `
+        <div class="container">
+          <h1 class="mb-20">Shopping Cart (${state.cart.length} items)</h1>
+          <div style="display: grid; grid-template-columns: 1fr 400px; gap: 20px;">
+            <div style="background: white; border-radius: 4px; overflow: hidden;">
+              <table class="cart-table">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Qty</th>
+                    <th>Total</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${state.cart.map((item, idx) => `
+                    <tr>
+                      <td><strong>${item.name}</strong><br><small>${item.size} | ${item.color}</small></td>
+                      <td>$${item.price}</td>
+                      <td><input type="number" min="1" max="10" value="${item.qty}" style="width: 40px; padding: 4px;" onchange="updateCartItem(${idx}, this.value)"></td>
+                      <td>$${(parseFloat(item.price) * item.qty).toFixed(2)}</td>
+                      <td><button class="btn btn-secondary" onclick="removeCartItem(${idx})">Remove</button></td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+
+            <div class="cart-summary">
+              <h3>Order Summary</h3>
+              <div class="summary-row">
+                <span>Subtotal:</span>
+                <span>$${total}</span>
+              </div>
+              <div class="summary-row">
+                <span>Shipping:</span>
+                <span style="color: #28a745; font-weight: 600;">FREE</span>
+              </div>
+              <div class="summary-row">
+                <span>Tax:</span>
+                <span>$${(total * 0.1).toFixed(2)}</span>
+              </div>
+              <div class="summary-row total">
+                <span>Total:</span>
+                <span>$${(parseFloat(total) + parseFloat(total) * 0.1).toFixed(2)}</span>
+              </div>
+              <button class="btn btn-primary" style="width: 100%; padding: 12px; margin-top: 20px; font-size: 14px;" onclick="setState({page: 'checkout'})">Proceed to Checkout</button>
+              <button class="btn btn-secondary" style="width: 100%; padding: 12px; margin-top: 8px;" onclick="setState({page: 'shop'})">Continue Shopping</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function getCheckoutPage() {
+      const total = state.cart.reduce((sum, item) => sum + (parseFloat(item.price) * item.qty), 0).toFixed(2);
+      const finalTotal = (parseFloat(total) + parseFloat(total) * 0.1).toFixed(2);
+      
+      return `
+        <div class="container">
+          <h1 class="mb-20">Checkout</h1>
+          <div style="display: grid; grid-template-columns: 1fr 400px; gap: 20px;">
+            <form style="background: white; padding: 20px; border-radius: 4px;" onsubmit="placeOrder(event)">
+              <h3>Shipping Address</h3>
+              <input type="text" placeholder="Full Name" required style="width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ddd;">
+              <input type="email" placeholder="Email" required style="width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ddd;">
+              <input type="tel" placeholder="Phone" required style="width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ddd;">
+              <input type="text" placeholder="Street Address" required style="width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ddd;">
+              <input type="text" placeholder="City" required style="width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ddd;">
+              <input type="text" placeholder="Postal Code" required style="width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ddd;">
+              
+              <h3 style="margin-top: 20px;">Payment Method</h3>
+              <select required style="width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ddd;">
+                <option>Credit/Debit Card</option>
+                <option>PayPal</option>
+                <option>Apple Pay</option>
+                <option>Google Pay</option>
+                <option>Bank Transfer</option>
+              </select>
+              
+              <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; margin-top: 20px; font-size: 14px;">Place Order</button>
+            </form>
+
+            <div class="cart-summary">
+              <h3>Order Review</h3>
+              ${state.cart.map(item => `
+                <div class="summary-row" style="border-bottom: 1px solid #ddd; padding-bottom: 8px;">
+                  <span>${item.name} x${item.qty}</span>
+                  <span>$${(parseFloat(item.price) * item.qty).toFixed(2)}</span>
+                </div>
+              `).join('')}
+              <div class="summary-row total">
+                <span>Total:</span>
+                <span>$${finalTotal}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function getAccountPage() {
+      return `
+        <div class="container">
+          <h1 class="mb-20">My Account</h1>
+          <div style="display: grid; grid-template-columns: 250px 1fr; gap: 20px;">
+            <div style="background: white; padding: 20px; border-radius: 4px; height: fit-content;">
+              <div style="margin-bottom: 16px; font-weight: 600; cursor: pointer;" onclick="openModal('profile')">👤 Profile</div>
+              <div style="margin-bottom: 16px; font-weight: 600; cursor: pointer;" onclick="openModal('orders')">📦 My Orders</div>
+              <div style="margin-bottom: 16px; font-weight: 600; cursor: pointer;" onclick="setState({page: 'returns'})">↩️ Returns</div>
+              <div style="margin-bottom: 16px; font-weight: 600; cursor: pointer;" onclick="openModal('addresses')">📍 Addresses</div>
+              <div style="margin-bottom: 16px; font-weight: 600; cursor: pointer;" onclick="openModal('payment')">💳 Payment Methods</div>
+              <div style="margin-bottom: 16px; font-weight: 600; cursor: pointer;" onclick="logout()">🚪 Logout</div>
+            </div>
+            <div style="background: white; padding: 20px; border-radius: 4px;">
+              <h3>Welcome to Your Account</h3>
+              <p style="color: #666; margin-top: 12px;">Sign in to view your orders, saved items, and personal information.</p>
+              ${!state.user ? `
+                <button class="btn btn-primary" style="width: 100%; padding: 12px; margin-top: 20px;" onclick="openModal('login')">Sign In</button>
+              ` : `
+                <p style="margin-top: 20px;"><strong>Welcome, ${state.user.name}!</strong></p>
+                <p>Email: ${state.user.email}</p>
+              `}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function getWishlistPage() {
+      if (state.wishlist.length === 0) {
+        return `
+          <div class="container">
+            <div class="text-center" style="padding: 60px 20px;">
+              <h2 style="margin-bottom: 20px;">Your Wishlist is Empty</h2>
+              <p style="color: #666; margin-bottom: 20px;">Add items to your wishlist to save them for later</p>
+              <button class="btn btn-primary" onclick="setState({page: 'shop'})">Start Shopping</button>
+            </div>
+          </div>
+        `;
+      }
+      
+      return `
+        <div class="container">
+          <h1 class="mb-20">My Wishlist (${state.wishlist.length} items)</h1>
+          <div class="products-grid">
+            ${state.wishlist.map(p => getProductCard(p)).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function getDealsPage() {
+      const deals = PRODUCTS.filter(p => p.badge === 'Sale').slice(0, 20);
+      return `
+        <div class="banner" style="background: linear-gradient(135deg, #FF6B35 0%, #232f3e 100%);">
+          <h1>🔥 Hot Deals & Discounts</h1>
+          <p>Limited time offers on premium sneakers</p>
+        </div>
+        <div class="container">
+          <div class="products-grid">
+            ${deals.length > 0 ? deals.map(p => getProductCard(p)).join('') : '<p>No deals available right now</p>'}
+          </div>
+        </div>
+      `;
+    }
+
+    function getAboutPage() {
+      return `
+        <div class="container">
+          <h1 class="mb-20">About www.sneakers.com</h1>
+          <div style="background: white; padding: 30px; border-radius: 4px; line-height: 1.8;">
+            <h3>Our Story</h3>
+            <p>www.sneakers.com is your ultimate destination for premium sneakers and athletic shoes. Founded in 2024, we've been committed to bringing the best brands and latest styles to customers worldwide.</p>
+            
+            <h3 style="margin-top: 20px;">Why Choose Us?</h3>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+              <li>✅ 100% Authentic Products</li>
+              <li>✅ Free Shipping on Orders Over $100</li>
+              <li>✅ 30-Day Returns & Exchanges</li>
+              <li>✅ Expert Customer Support</li>
+              <li>✅ Price Match Guarantee</li>
+              <li>✅ Secure Checkout</li>
+            </ul>
+
+            <h3 style="margin-top: 20px;">Contact Information</h3>
+            <p>Email: info@sneakers-limbe.com</p>
+            <p>Phone: +237 672 996 820</p>
+            <p>Address: Down Beach Area, Limbe, Cameroon</p>
+            <p>Hours: Mon-Sat 9AM-6PM, Sun 10AM-4PM</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function getProductCard(product) {
+      return `
+        <div class="product-card" onclick="openProductModal(${product.id})">
+          <div class="product-image" style="background-image: url('${product.image}')">
+            ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+          </div>
+          <div class="product-info">
+            <div class="product-brand">${product.brand}</div>
+            <div class="product-name">${product.name}</div>
+            <div class="product-rating">⭐ ${product.rating} (${product.reviews} reviews)</div>
+            <div class="product-price">$${product.price}</div>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="event.stopPropagation(); addToCart(${product.id})">Add</button>
+              <button class="btn btn-secondary" onclick="event.stopPropagation(); toggleWishlist(${product.id})" title="Add to Wishlist">❤️</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function getFooter() {
+      return `
+        <footer>
+          <div class="footer-grid">
+            <div class="footer-section">
+              <h3>Customer Service</h3>
+              <a onclick="openModal('contact')">Contact Us</a>
+              <a onclick="openModal('faq')">FAQ & Help</a>
+              <a onclick="openModal('tracking')">Track Order</a>
+              <a onclick="setState({page: 'returns'})">Returns & Exchanges</a>
+              <a onclick="openModal('shipping')">Shipping Info</a>
+            </div>
+            <div class="footer-section">
+              <h3>About Us</h3>
+              <a onclick="setState({page: 'about'})">About www.sneakers.com</a>
+              <a onclick="openModal('blog')">Blog</a>
+              <a onclick="openModal('careers')">Careers</a>
+              <a onclick="openModal('sustainability')">Sustainability</a>
+            </div>
+            <div class="footer-section">
+              <h3>Legal</h3>
+              <a onclick="openModal('privacy')">Privacy Policy</a>
+              <a onclick="openModal('terms')">Terms of Service</a>
+              <a onclick="openModal('cookies')">Cookie Settings</a>
+              <a onclick="openModal('disclaimer')">Disclaimer</a>
+            </div>
+            <div class="footer-section">
+              <h3>Follow Us</h3>
+              <a href="#" target="_blank">Facebook</a>
+              <a href="#" target="_blank">Instagram</a>
+              <a href="#" target="_blank">Twitter</a>
+              <a href="#" target="_blank">YouTube</a>
+              <a href="https://wa.me/237672996820?text=Hello%20sneakers.com!" target="_blank">WhatsApp</a>
+            </div>
+          </div>
+          <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #555;">
+            <p>&copy; 2026 www.sneakers.com. All rights reserved.</p>
+            <p style="font-size: 12px; margin-top: 10px;">Secure Shopping | Free Returns | Fast Shipping</p>
+          </div>
+        </footer>
+      `;
+    }
+
+    // Utility Functions
+    function filterProducts() {
+      return PRODUCTS.filter(p => {
+        const genderMatch = state.filters.gender === 'all' || p.gender === state.filters.gender;
+        const categoryMatch = state.filters.category === 'all' || p.category === state.filters.category;
+        const priceMatch = parseFloat(p.price) <= state.filters.priceRange[1];
+        const brandMatch = state.filters.brand === 'all' || p.brand === state.filters.brand;
+        return genderMatch && categoryMatch && priceMatch && brandMatch;
+      });
+    }
+
+    function setFilter(type, value) {
+      if (type === 'gender') state.filters.gender = value;
+      if (type === 'category') state.filters.category = value;
+      if (type === 'price') state.filters.priceRange = value;
+      if (type === 'brand') state.filters.brand = value;
+      setState({page: 'shop'});
+    }
+
+    function resetFilters() {
+      state.filters = { gender: 'all', category: 'all', priceRange: [0, 300], brand: 'all' };
+      render();
+    }
+
+    function sortProducts(type) {
+      if (type === 'price-low') PRODUCTS.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+      if (type === 'price-high') PRODUCTS.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+      if (type === 'rating') PRODUCTS.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
+      render();
+    }
+
+    function searchProducts() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      if (query.trim()) {
+        setState({page: 'shop'});
+        // Filter would need to be enhanced to support search
+      }
+    }
+
+    function addToCart(productId) {
+      const product = PRODUCTS.find(p => p.id === productId);
+      if (!product) return;
+
+      const cartItem = {
+        ...product,
+        qty: 1,
+        size: product.sizes[0],
+        color: product.colors[0]
+      };
+
+      const existing = state.cart.find(item => item.id === productId);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        state.cart.push(cartItem);
+      }
+      alert('✅ Added to cart!');
+      render();
+    }
+
+    function removeCartItem(index) {
+      state.cart.splice(index, 1);
+      render();
+    }
+
+    function updateCartItem(index, qty) {
+      state.cart[index].qty = Math.max(1, parseInt(qty));
+      render();
+    }
+
+    function toggleWishlist(productId) {
+      const product = PRODUCTS.find(p => p.id === productId);
+      const existing = state.wishlist.find(item => item.id === productId);
+      
+      if (existing) {
+        state.wishlist = state.wishlist.filter(item => item.id !== productId);
+      } else {
+        state.wishlist.push(product);
+      }
+      render();
+    }
+
+    function openProductModal(productId) {
+      const product = PRODUCTS.find(p => p.id === productId);
+      if (!product) return;
+
+      const modal = document.createElement('div');
+      modal.className = 'modal active';
+      modal.innerHTML = `
+        <div class="modal-content">
+          <span class="modal-close" onclick="this.parentElement.parentElement.remove()">&times;</span>
+          <div class="product-detail-grid">
+            <div class="detail-image" style="background-image: url('${product.image}')"></div>
+            <div class="detail-info">
+              <h1>${product.name}</h1>
+              <div class="detail-rating">⭐ ${product.rating} | ${product.reviews} reviews | In Stock</div>
+              <div class="detail-price">$${product.price}</div>
+              <p style="margin: 20px 0; color: #666;">${product.description}</p>
+              
+              <div class="detail-options">
+                <div class="option-group">
+                  <div class="option-label">Choose Size</div>
+                  <div class="option-values">
+                    ${product.sizes.map(size => `<div class="option-value" onclick="this.classList.toggle('selected')">${size}</div>`).join('')}
+                  </div>
+                </div>
+                <div class="option-group">
+                  <div class="option-label">Choose Color</div>
+                  <div class="option-values">
+                    ${product.colors.map(color => `<div class="option-value" onclick="this.classList.toggle('selected')">${color}</div>`).join('')}
+                  </div>
+                </div>
+              </div>
+
+              <div style="margin-top: 30px;">
+                <button class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 16px;" onclick="addToCart(${product.id}); this.parentElement.parentElement.parentElement.remove();">Add to Cart</button>
+                <button class="btn btn-secondary" style="width: 100%; padding: 10px; margin-top: 10px;" onclick="toggleWishlist(${product.id}); this.parentElement.parentElement.parentElement.remove();">Add to Wishlist</button>
+              </div>
+
+              <div style="margin-top: 30px; border-top: 1px solid #ddd; padding-top: 20px;">
+                <h4>Customer Reviews</h4>
+                ${REVIEWS_DATA.slice(0, 3).map(r => `
+                  <div style="margin-bottom: 16px;">
+                    <div style="font-weight: 600;">${r.author} ${r.verified ? '✓' : ''}</div>
+                    <div style="color: #ffc107; font-size: 12px;">⭐ ${r.rating}/5</div>
+                    <p style="font-size: 13px; color: #666; margin-top: 4px;">"${r.text}"</p>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+
+    function openModal(type) {
+      let content = '';
+      if (type === 'login') {
+        content = `
+          <h2>Sign In</h2>
+          <div style="margin-top: 20px;">
+            <input type="email" placeholder="Email" style="width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ddd;">
+            <input type="password" placeholder="Password" style="width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ddd;">
+            <button class="btn btn-primary" style="width: 100%; padding: 10px;" onclick="loginUser(); document.querySelector('.modal').remove();">Sign In</button>
+          </div>
+        `;
+      }
+      
+      const modal = document.createElement('div');
+      modal.className = 'modal active';
+      modal.innerHTML = `
+        <div class="modal-content">
+          <span class="modal-close" onclick="this.parentElement.parentElement.remove()">&times;</span>
+          ${content || `<h2>${type}</h2><p>Content for ${type}</p>`}
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+
+    function setState(newState) {
+      state = { ...state, ...newState };
+      render();
+    }
+
+    function placeOrder(e) {
+      e.preventDefault();
+      const orderId = Math.random().toString(36).substr(2, 9).toUpperCase();
+      state.orders.push({
+        id: orderId,
+        date: new Date().toLocaleDateString(),
+        total: state.cart.reduce((sum, item) => sum + (parseFloat(item.price) * item.qty), 0),
+        items: state.cart.length,
+        status: 'Processing'
+      });
+      state.cart = [];
+      alert(`✅ Order ${orderId} placed successfully!`);
+      setState({page: 'home'});
+    }
+
+    // ADMIN AUTHENTICATION
+    function adminLogin() {
+      const username = document.getElementById('adminUsername')?.value;
+      const password = document.getElementById('adminPassword')?.value;
+
+      if (username === 'Machala' && password === 'MACHALA#2024') {
+        state.admin = { name: 'Administrator', role: 'admin' };
+        setState({ page: 'admin' });
+      } else {
+        alert('Invalid credentials.');
+      }
+    }
+
+    function adminLogout() {
+      state.admin = null;
+      setState({ page: 'home' });
+    }
+
+    // PRODUCT MANAGEMENT
+    function openAddProductModal() {
+      const html = `
+        <div style="background: white; padding: 30px; border-radius: 8px; max-width: 500px;">
+          <h2>Add New Product</h2>
+          <div class="form-group">
+            <label>Brand</label>
+            <select id="newBrand" style="width: 100%; padding: 8px; margin: 8px 0;">
+              <option>Nike</option>
+              <option>Adidas</option>
+              <option>NewBalance</option>
+              <option>Jordan</option>
+              <option>Puma</option>
+              <option>Reebok</option>
+              <option>Vans</option>
+              <option>Converse</option>
+              <option>Timberland</option>
+              <option>Skechers</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Model Name</label>
+            <input type="text" id="newModel" placeholder="e.g., Air Force 1" style="width: 100%; padding: 8px; margin: 8px 0;">
+          </div>
+          <div class="form-group">
+            <label>Price</label>
+            <input type="number" id="newPrice" placeholder="99.99" style="width: 100%; padding: 8px; margin: 8px 0;">
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <select id="newCategory" style="width: 100%; padding: 8px; margin: 8px 0;">
+              <option>Running</option>
+              <option>Basketball</option>
+              <option>Casual</option>
+              <option>Formal</option>
+              <option>Trail</option>
+              <option>Sport</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Gender</label>
+            <select id="newGender" style="width: 100%; padding: 8px; margin: 8px 0;">
+              <option>Men</option>
+              <option>Women</option>
+              <option>Kids</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Image URL</label>
+            <input type="text" id="newImage" placeholder="https://images.unsplash.com/..." style="width: 100%; padding: 8px; margin: 8px 0;">
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea id="newDesc" placeholder="Product description..." rows="3" style="width: 100%; padding: 8px; margin: 8px 0;"></textarea>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button class="btn btn-primary" onclick="addNewProduct()">Add Product</button>
+            <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+          </div>
+        </div>
+      `;
+      const modal = document.createElement('div');
+      modal.id = 'productModal';
+      modal.className = 'modal';
+      modal.style.display = 'flex';
+      modal.innerHTML = html;
+      modal.onclick = (e) => e.target === modal && closeModal();
+      document.body.appendChild(modal);
+    }
+
+    function addNewProduct() {
+      const brand = document.getElementById('newBrand')?.value;
+      const model = document.getElementById('newModel')?.value;
+      const price = parseFloat(document.getElementById('newPrice')?.value);
+      const category = document.getElementById('newCategory')?.value;
+      const gender = document.getElementById('newGender')?.value;
+      const image = document.getElementById('newImage')?.value;
+      const desc = document.getElementById('newDesc')?.value;
+
+      if (!brand || !model || !price || !category || !gender || !image) {
+        alert('Please fill all required fields');
+        return;
+      }
+
+      const newProduct = {
+        id: PRODUCTS.length + 1,
+        brand: brand,
+        name: brand + ' ' + model,
+        model: model,
+        price: price,
+        image: image,
+        rating: 4.5,
+        reviews: 0,
+        gender: gender,
+        category: category,
+        sizes: [6, 7, 8, 9, 10, 11, 12, 13, 14],
+        colors: ['Black', 'White', 'Red', 'Blue', 'Gray'],
+        description: desc,
+        inStock: true,
+        badge: 'New'
+      };
+
+      PRODUCTS.push(newProduct);
+      alert('✅ Product added successfully!');
+      closeModal();
+      render();
+    }
+
+    function editProduct(id) {
+      alert('Edit feature coming soon');
+    }
+
+    function deleteProduct(id) {
+      if (confirm('Are you sure you want to delete this product?')) {
+        const index = PRODUCTS.findIndex(p => p.id === id);
+        if (index > -1) {
+          PRODUCTS.splice(index, 1);
+          alert('✅ Product deleted');
+          render();
+        }
+      }
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('productModal');
+      if (modal) modal.remove();
+    }
+
+    // ORDER MANAGEMENT
+    function viewOrderDetails(orderId) {
+      const order = state.orders.find(o => o.id === orderId);
+      if (order) {
+        alert(`Order Details:\n\nID: ${order.id}\nDate: ${order.date}\nItems: ${order.items}\nTotal: $${order.total.toFixed(2)}\nStatus: ${order.status}`);
+      }
+    }
+
+    function updateOrderStatus(orderId) {
+      const statuses = ['Processing', 'Shipped', 'In Transit', 'Delivered'];
+      const order = state.orders.find(o => o.id === orderId);
+      if (order) {
+        const currentIndex = statuses.indexOf(order.status);
+        order.status = statuses[(currentIndex + 1) % statuses.length];
+        alert(`✅ Order status updated to: ${order.status}`);
+        render();
+      }
+    }
+
+    // CHAT MANAGEMENT
+    function selectConversation(index) {
+      const convs = document.querySelectorAll('[style*="border-bottom"]');
+      convs.forEach((el, i) => {
+        el.style.background = i === index ? '#f0f0f0' : 'white';
+      });
+    }
+
+    function sendAdminMessage() {
+      const reply = document.getElementById('adminReply')?.value;
+      if (!reply || state.messages.length === 0) {
+        alert('No conversation selected');
+        return;
+      }
+
+      const lastConv = state.messages[state.messages.length - 1];
+      lastConv.messages.push({
+        sender: 'admin',
+        text: reply,
+        time: new Date().toLocaleTimeString()
+      });
+
+      document.getElementById('adminReply').value = '';
+      render();
+    }
+
+    function loginUser() {
+      state.user = { name: 'Guest User', email: 'user@example.com' };
+      render();
+    }
+
+    function logout() {
+      state.user = null;
+      render();
+    }
+
+    function subscribeNewsletter() {
+      const email = document.getElementById('newsletterEmail').value;
+      if (email) alert(`✅ Subscribed! Check ${email} for exclusive deals.`);
+    }
+
+    function attachEventListeners() {}
+
+    init();
+  </script>
+</body>
+</html>
