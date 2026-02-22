@@ -120,6 +120,18 @@
     .footer-section h3 { margin-bottom: 15px; font-size: 14px; }
     .footer-section a { display: block; color: #ccc; text-decoration: none; font-size: 12px; margin-bottom: 8px; cursor: pointer; transition: color 0.3s; }
     .footer-section a:hover { color: #FF6B35; }
+    .reviews-strip { max-width: 1400px; margin: 0 auto 28px; }
+    .reviews-strip h3 { font-size: 16px; margin-bottom: 12px; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .review-card { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 8px; padding: 12px; }
+    .review-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .review-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255, 255, 255, 0.35); }
+    .review-name { font-size: 12px; font-weight: 700; }
+    .review-stars { color: #ffd24c; font-size: 12px; letter-spacing: 1px; }
+    .review-text { color: #d8dde3; font-size: 12px; line-height: 1.5; }
+    .social-link { display: flex !important; align-items: center; gap: 8px; }
+    .social-icon { width: 16px; height: 16px; display: inline-block; filter: brightness(0) saturate(100%) invert(82%) sepia(0%) saturate(0%) hue-rotate(145deg) brightness(89%) contrast(91%); transition: filter 0.3s; }
+    .social-link:hover .social-icon { filter: brightness(0) saturate(100%) invert(57%) sepia(93%) saturate(2157%) hue-rotate(337deg) brightness(100%) contrast(102%); }
     
     /* Utilities */
     .hidden { display: none; }
@@ -133,6 +145,8 @@
       .product-detail-grid { grid-template-columns: 1fr; }
       .filters-section { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .cookie-banner { left: 12px; right: 12px; bottom: 12px; flex-direction: column; align-items: flex-start; }
       .search-container { display: none; }
       .products-grid { grid-template-columns: repeat(2, 1fr); }
     }
@@ -173,6 +187,13 @@
     .chat-toggle:hover { background: #E55A25; }
     .unread-badge { position: absolute; top: -5px; right: -5px; background: #ff0000; color: white; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; }
     .chat-widget { position: fixed; z-index: 1999; }
+    
+    /* Cookie Banner */
+    .cookie-banner { position: fixed; left: 20px; right: 20px; bottom: 20px; background: #ffffff; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; gap: 16px; z-index: 2100; }
+    .cookie-text { font-size: 13px; color: #333; line-height: 1.5; }
+    .cookie-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn-outline { background: #fff; color: #333; border: 1px solid #bbb; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 600; }
+    .btn-outline:hover { border-color: #666; }
   </style>
 </head>
 <body>
@@ -263,6 +284,271 @@
       });
     });
 
+    // Imported additions from Famous Footwear sneaker catalog references
+    const FAMOUS_FOOTWEAR_IMPORTED_PRODUCTS = [
+      {
+        brand: 'Adidas',
+        name: "adidas Women's VL Court 3.0 Sneaker",
+        model: 'VL Court 3.0',
+        price: '69.99',
+        image: 'https://images.unsplash.com/photo-1543508282-6319a3e2621f?w=400&h=400&fit=crop',
+        rating: '4.6',
+        reviews: 184,
+        gender: 'Women',
+        category: 'Casual',
+        sourceUrl: 'https://www.famousfootwear.com/product/adidas-womens-vl-court-3-0-sneaker-1068213/cream-beige-gold-65769'
+      },
+      {
+        brand: 'Nike',
+        name: "Nike Women's V5 RNR Sneaker",
+        model: 'V5 RNR',
+        price: '94.99',
+        image: 'https://images.unsplash.com/photo-1514989940723-e8e51635b782?w=400&h=400&fit=crop',
+        rating: '4.7',
+        reviews: 231,
+        gender: 'Women',
+        category: 'Running',
+        sourceUrl: 'https://www.famousfootwear.com/product/nike-womens-v5-rnr-sneaker-1068215/white-metallic-silver-grey-fog-10350'
+      },
+      {
+        brand: 'Nike',
+        name: "Nike Men's Court Vision Mid Sneaker",
+        model: 'Court Vision Mid',
+        price: '84.99',
+        image: 'https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=400&h=400&fit=crop',
+        rating: '4.5',
+        reviews: 167,
+        gender: 'Men',
+        category: 'Basketball',
+        sourceUrl: 'https://www.famousfootwear.com/product/nike-mens-court-vision-mid-sneaker-1030444/white-black-13087'
+      },
+      {
+        brand: 'Nike',
+        name: "Nike Men's Court Vision Low Sneaker",
+        model: 'Court Vision Low',
+        price: '79.99',
+        image: 'https://images.unsplash.com/photo-1465453869711-7e174808ace9?w=400&h=400&fit=crop',
+        rating: '4.6',
+        reviews: 203,
+        gender: 'Men',
+        category: 'Casual',
+        sourceUrl: 'https://www.famousfootwear.com/product/nike-mens-court-vision-low-sneaker-1046901/white-black-13089'
+      },
+      {
+        brand: 'Nike',
+        name: "Nike Women's Revolution 8 Running Shoe",
+        model: 'Revolution 8',
+        price: '74.99',
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop',
+        rating: '4.4',
+        reviews: 120,
+        gender: 'Women',
+        category: 'Running',
+        sourceUrl: 'https://www.famousfootwear.com/product/nike-womens-revolution-8-running-shoe-1068299/white-turf-orange-soft-pearl-30053'
+      },
+      {
+        brand: 'Nike',
+        name: "Nike Kids' V5 RNR Running Shoe Little Kid",
+        model: 'V5 RNR Little Kid',
+        price: '64.99',
+        image: 'https://images.unsplash.com/photo-1575537302964-96cd47c06b1b?w=400&h=400&fit=crop',
+        rating: '4.6',
+        reviews: 88,
+        gender: 'Kids',
+        category: 'Running',
+        sourceUrl: 'https://www.famousfootwear.com/product/nike-kids-v5-rnr-running-shoe-little-kid-1068640/white-metallic-silver-grey-fog-10349'
+      },
+      {
+        brand: 'Nike',
+        name: "Nike Kids' V5 RNR Sneaker Big Kid",
+        model: 'V5 RNR Big Kid',
+        price: '69.99',
+        image: 'https://images.unsplash.com/photo-1607522370275-f14206abe5d3?w=400&h=400&fit=crop',
+        rating: '4.7',
+        reviews: 95,
+        gender: 'Kids',
+        category: 'Running',
+        sourceUrl: 'https://www.famousfootwear.com/product/nike-kids-v5-rnr-sneaker-big-kid-1068638/white-metallic-silver-grey-fog-10349'
+      },
+      {
+        brand: 'Adidas',
+        name: "adidas Women's Run 70s 2.0 Retro Sneaker",
+        model: 'Run 70s 2.0',
+        price: '79.99',
+        image: 'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=400&h=400&fit=crop',
+        rating: '4.5',
+        reviews: 142,
+        gender: 'Women',
+        category: 'Running',
+        sourceUrl: 'https://www.famousfootwear.com/product/adidas-womens-run-70s-2-0-retro-sneaker-1068575/grey-silver-metallic-light-grey-91836'
+      },
+      {
+        brand: 'Puma',
+        name: "PUMA Men's Pacer 23 Street Sneaker",
+        model: 'Pacer 23 Street',
+        price: '74.99',
+        image: 'https://images.unsplash.com/photo-1518002171953-a080ee817e1f?w=400&h=400&fit=crop',
+        rating: '4.3',
+        reviews: 76,
+        gender: 'Men',
+        category: 'Casual',
+        sourceUrl: 'https://www.famousfootwear.com/product/puma-mens-pacer-23-street-sneaker-1059927/dark-coal-black-gold-04214'
+      },
+      {
+        brand: 'Jordan',
+        name: "Jordan Men's CMFT ERA Sneaker",
+        model: 'CMFT ERA',
+        price: '114.99',
+        image: 'https://images.unsplash.com/photo-1556906781-9a412961c28c?w=400&h=400&fit=crop',
+        rating: '4.7',
+        reviews: 131,
+        gender: 'Men',
+        category: 'Basketball',
+        sourceUrl: 'https://www.famousfootwear.com/product/jordan-mens-cmft-era-sneaker-1068604/white-black-varsity-red-10295'
+      },
+      {
+        brand: 'Jordan',
+        name: "Jordan Men's Flight Origin 3 Mid Sneaker",
+        model: 'Flight Origin 3 Mid',
+        price: '99.99',
+        image: 'https://images.unsplash.com/photo-1511556820780-d912e42b4980?w=400&h=400&fit=crop',
+        rating: '4.6',
+        reviews: 109,
+        gender: 'Men',
+        category: 'Basketball',
+        sourceUrl: 'https://www.famousfootwear.com/product/jordan-mens-flight-origin-3-mid-sneaker-1041890/white-gym-red-black-05249'
+      },
+      {
+        brand: 'Jordan',
+        name: "Jordan Women's Air Jordan Legacy 312 Low Court Sneaker",
+        model: 'Legacy 312 Low',
+        price: '124.99',
+        image: 'https://images.unsplash.com/photo-1539185441755-769473a23570?w=400&h=400&fit=crop',
+        rating: '4.8',
+        reviews: 97,
+        gender: 'Women',
+        category: 'Basketball',
+        sourceUrl: 'https://www.famousfootwear.com/product/jordan-womens-air-jordan-legacy-312-low-court-sneaker-1068607/white-black-sail-gym-red-15736'
+      },
+      {
+        brand: 'Skechers',
+        name: "Skechers Men's Vapor Foam Stretch Fit Slip On Sneaker",
+        model: 'Vapor Foam Stretch Fit',
+        price: '69.99',
+        image: 'https://images.unsplash.com/photo-1595341888016-a392ef81b7de?w=400&h=400&fit=crop',
+        rating: '4.4',
+        reviews: 143,
+        gender: 'Men',
+        category: 'Casual',
+        sourceUrl: 'https://www.famousfootwear.com/product/skechers-mens-vapor-foam-stretch-fit-slip-on-sneaker-1068425/black-charcoal-08856'
+      },
+      {
+        brand: 'Converse',
+        name: "Converse Men's Chuck Taylor All Star High Street High Top Sneaker",
+        model: 'Chuck Taylor High Street',
+        price: '64.99',
+        image: 'https://images.unsplash.com/photo-1463100099107-aa0980c362e6?w=400&h=400&fit=crop',
+        rating: '4.7',
+        reviews: 255,
+        gender: 'Men',
+        category: 'Casual',
+        sourceUrl: 'https://www.famousfootwear.com/product/converse-mens-chuck-taylor-all-star-high-street-high-top-sneaker-1045597/black-white-02595'
+      },
+      {
+        brand: 'Nike',
+        name: "Nike Women's AL8 Sneaker",
+        model: 'AL8',
+        price: '89.99',
+        image: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400&h=400&fit=crop',
+        rating: '4.5',
+        reviews: 74,
+        gender: 'Women',
+        category: 'Casual',
+        sourceUrl: 'https://www.famousfootwear.com/browse/shoes/sneakers-and-athletic-shoes#sortCriteria=relevance'
+      },
+      {
+        brand: 'Nike',
+        name: "Nike Women's Court Vision Sneaker",
+        model: 'Court Vision',
+        price: '79.99',
+        image: 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=400&h=400&fit=crop',
+        rating: '4.6',
+        reviews: 118,
+        gender: 'Women',
+        category: 'Casual',
+        sourceUrl: 'https://www.famousfootwear.com/browse/shoes/sneakers-and-athletic-shoes#sortCriteria=relevance'
+      },
+      {
+        brand: 'Adidas',
+        name: "adidas Men's VL Court 3.0 Sneaker",
+        model: 'VL Court 3.0',
+        price: '69.99',
+        image: 'https://images.unsplash.com/photo-1597248881519-db089d3744a5?w=400&h=400&fit=crop',
+        rating: '4.5',
+        reviews: 102,
+        gender: 'Men',
+        category: 'Casual',
+        sourceUrl: 'https://www.famousfootwear.com/browse/shoes/sneakers-and-athletic-shoes#sortCriteria=relevance'
+      },
+      {
+        brand: 'Converse',
+        name: "Converse Women's Chuck Taylor All Star Move Platform Sneaker",
+        model: 'Chuck Taylor Move Platform',
+        price: '74.99',
+        image: 'https://images.unsplash.com/photo-1556048219-bb6978360b84?w=400&h=400&fit=crop',
+        rating: '4.7',
+        reviews: 166,
+        gender: 'Women',
+        category: 'Casual',
+        sourceUrl: 'https://www.famousfootwear.com/browse/shoes/sneakers-and-athletic-shoes#sortCriteria=relevance'
+      },
+      {
+        brand: 'NewBalance',
+        name: "New Balance Women's 237 Retro Sneaker",
+        model: '237 Retro',
+        price: '89.99',
+        image: 'https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=400&h=400&fit=crop',
+        rating: '4.6',
+        reviews: 89,
+        gender: 'Women',
+        category: 'Casual',
+        sourceUrl: 'https://www.famousfootwear.com/browse/shoes/sneakers-and-athletic-shoes#sortCriteria=relevance'
+      },
+      {
+        brand: 'NewBalance',
+        name: "New Balance Women's 515 Retro Sneaker",
+        model: '515 Retro',
+        price: '84.99',
+        image: 'https://images.unsplash.com/photo-1600269452121-4f2416e55c28?w=400&h=400&fit=crop',
+        rating: '4.5',
+        reviews: 81,
+        gender: 'Women',
+        category: 'Casual',
+        sourceUrl: 'https://www.famousfootwear.com/browse/shoes/sneakers-and-athletic-shoes#sortCriteria=relevance'
+      }
+    ];
+
+    FAMOUS_FOOTWEAR_IMPORTED_PRODUCTS.forEach((item) => {
+      PRODUCTS.push({
+        id: productId++,
+        brand: item.brand,
+        name: item.name,
+        model: item.model,
+        price: item.price,
+        image: item.image,
+        rating: item.rating,
+        reviews: item.reviews,
+        gender: item.gender,
+        category: item.category,
+        sizes: [6, 7, 8, 9, 10, 11, 12, 13, 14],
+        colors: ['Black', 'White', 'Red', 'Blue', 'Gray'],
+        description: `${item.name} inspired by the Famous Footwear sneakers catalog.`,
+        inStock: true,
+        badge: 'New',
+        sourceUrl: item.sourceUrl
+      });
+    });
+
     const REVIEWS_DATA = [
       { author: 'John Smith', rating: 5, text: 'Amazing quality and super comfortable!', verified: true },
       { author: 'Sarah Johnson', rating: 5, text: 'Great fit, fast shipping, highly recommend', verified: true },
@@ -281,6 +567,8 @@
         priceRange: [0, 300],
         brand: 'all'
       },
+      searchQuery: '',
+      cookieConsent: null,
       user: null,
       admin: null,
       orders: [],
@@ -289,14 +577,143 @@
       adminChatOpen: false
     };
 
+    const PERF_COOKIE_NAME = 'sneakers_perf_v1';
+    const CONSENT_COOKIE_NAME = 'sneakers_cookie_consent_v1';
+    const PERF_COOKIE_DAYS = 30;
+    const PAGE_ALLOWLIST = new Set([
+      'home', 'shop', 'cart', 'wishlist', 'account', 'orders', 'about', 'returns', 'checkout',
+      'admin', 'admin-products', 'admin-orders', 'admin-chat'
+    ]);
+
+    function createDefaultFilters() {
+      return { gender: 'all', category: 'all', priceRange: [0, 300], brand: 'all' };
+    }
+
+    function setCookie(name, value, days) {
+      const expires = new Date(Date.now() + days * 24 * 60 * 60 * 1000).toUTCString();
+      document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=Lax`;
+    }
+
+    function clearCookie(name) {
+      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; SameSite=Lax`;
+    }
+
+    function getCookie(name) {
+      const target = `${name}=`;
+      const parts = document.cookie.split(';');
+      for (let i = 0; i < parts.length; i += 1) {
+        const cookie = parts[i].trim();
+        if (cookie.startsWith(target)) {
+          return decodeURIComponent(cookie.substring(target.length));
+        }
+      }
+      return null;
+    }
+
+    function escapeHtml(text) {
+      return String(text || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function savePerformanceCookie() {
+      if (state.cookieConsent !== 'accepted') return;
+      try {
+        const payload = {
+          page: PAGE_ALLOWLIST.has(state.page) ? state.page : 'home',
+          searchQuery: (state.searchQuery || '').slice(0, 80),
+          filters: {
+            gender: state.filters.gender,
+            category: state.filters.category,
+            priceRange: state.filters.priceRange,
+            brand: state.filters.brand
+          }
+        };
+        setCookie(PERF_COOKIE_NAME, JSON.stringify(payload), PERF_COOKIE_DAYS);
+      } catch (e) {
+        // Ignore cookie write errors.
+      }
+    }
+
+    function loadPerformanceCookie() {
+      try {
+        const consent = getCookie(CONSENT_COOKIE_NAME);
+        if (consent === 'accepted' || consent === 'rejected') {
+          state.cookieConsent = consent;
+        }
+        if (state.cookieConsent !== 'accepted') return;
+
+        const raw = getCookie(PERF_COOKIE_NAME);
+        if (!raw) return;
+        const data = JSON.parse(raw);
+
+        if (data && PAGE_ALLOWLIST.has(data.page)) {
+          state.page = data.page;
+        }
+        if (data && typeof data.searchQuery === 'string') {
+          state.searchQuery = data.searchQuery.slice(0, 80);
+        }
+
+        const defaultFilters = createDefaultFilters();
+        if (data && data.filters && typeof data.filters === 'object') {
+          if (typeof data.filters.gender === 'string') defaultFilters.gender = data.filters.gender;
+          if (typeof data.filters.category === 'string') defaultFilters.category = data.filters.category;
+          if (typeof data.filters.brand === 'string') defaultFilters.brand = data.filters.brand;
+          if (
+            Array.isArray(data.filters.priceRange) &&
+            data.filters.priceRange.length === 2 &&
+            Number.isFinite(data.filters.priceRange[0]) &&
+            Number.isFinite(data.filters.priceRange[1])
+          ) {
+            defaultFilters.priceRange = data.filters.priceRange;
+          }
+        }
+        state.filters = defaultFilters;
+      } catch (e) {
+        // Ignore malformed cookie data.
+      }
+    }
+
     function init() {
+      loadPerformanceCookie();
       render();
     }
 
     function render() {
       const app = document.getElementById('app');
-      app.innerHTML = getHeader() + getNavigation() + getPageContent() + getFooter() + getChatWidget();
+      app.innerHTML = getHeader() + getNavigation() + getPageContent() + getFooter() + getChatWidget() + getCookieBanner();
       attachEventListeners();
+      savePerformanceCookie();
+    }
+
+    function setCookieConsent(value) {
+      state.cookieConsent = value;
+      setCookie(CONSENT_COOKIE_NAME, value, PERF_COOKIE_DAYS);
+      if (value === 'accepted') {
+        savePerformanceCookie();
+      } else {
+        clearCookie(PERF_COOKIE_NAME);
+      }
+      render();
+    }
+
+    function getCookieBanner() {
+      if (state.cookieConsent) return '';
+      return `
+        <div class="cookie-banner">
+          <div class="cookie-text">
+            We use cookies to remember your preferences and improve site performance.
+            <a href="#" onclick="openModal('cookies'); return false;">Cookie Settings</a>
+          </div>
+          <div class="cookie-actions">
+            <button class="btn-outline" onclick="setCookieConsent('rejected')">Reject</button>
+            <button class="btn btn-primary" onclick="setCookieConsent('accepted')">Accept</button>
+          </div>
+        </div>
+      `;
     }
 
     function getChatWidget() {
@@ -388,7 +805,7 @@
               <a onclick="openModal('tracking')">Track Orders</a>
             </div>
             <div>
-              <a onclick="setState({page: 'Returns'})">Returns & Exchanges</a>
+              <a onclick="setState({page: 'returns'})">Returns & Exchanges</a>
               <a onclick="openModal('help')">Help</a>
               <a onclick="setState({page: 'account'})">${state.user ? 'My Account' : 'Sign In'}</a>
             </div>
@@ -415,7 +832,7 @@
                 <span class="logo-text">sneakers.com</span>
               </div>
               <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Search shoes, brands...">
+                <input type="text" id="searchInput" value="${escapeHtml(state.searchQuery)}" placeholder="Search shoes, brands...">
                 <button onclick="searchProducts()">Search</button>
               </div>
             </div>
@@ -1052,6 +1469,41 @@
     function getFooter() {
       return `
         <footer>
+          <div class="reviews-strip">
+            <h3>Customer Reviews</h3>
+            <div class="reviews-grid">
+              <div class="review-card">
+                <div class="review-head">
+                  <img class="review-avatar" src="https://i.pravatar.cc/72?img=12" alt="Customer profile">
+                  <div>
+                    <div class="review-name">Grace M.</div>
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                  </div>
+                </div>
+                <p class="review-text">Fast delivery and the shoe fit was perfect. Quality feels premium.</p>
+              </div>
+              <div class="review-card">
+                <div class="review-head">
+                  <img class="review-avatar" src="https://i.pravatar.cc/72?img=32" alt="Customer profile">
+                  <div>
+                    <div class="review-name">Daniel K.</div>
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+                  </div>
+                </div>
+                <p class="review-text">Great support and smooth checkout. I will order again next month.</p>
+              </div>
+              <div class="review-card">
+                <div class="review-head">
+                  <img class="review-avatar" src="https://i.pravatar.cc/72?img=47" alt="Customer profile">
+                  <div>
+                    <div class="review-name">Amina T.</div>
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                  </div>
+                </div>
+                <p class="review-text">Exactly what I expected from the photos. Very comfortable pair.</p>
+              </div>
+            </div>
+          </div>
           <div class="footer-grid">
             <div class="footer-section">
               <h3>Customer Service</h3>
@@ -1077,11 +1529,11 @@
             </div>
             <div class="footer-section">
               <h3>Follow Us</h3>
-              <a href="#" target="_blank">Facebook</a>
-              <a href="#" target="_blank">Instagram</a>
-              <a href="#" target="_blank">Twitter</a>
-              <a href="#" target="_blank">YouTube</a>
-              <a href="https://wa.me/237672996820?text=Hello%20sneakers.com!" target="_blank">WhatsApp</a>
+              <a class="social-link" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/facebook.svg" alt="Facebook icon">Facebook</a>
+              <a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/instagram.svg" alt="Instagram icon">Instagram</a>
+              <a class="social-link" href="https://x.com/" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/x.svg" alt="X icon">X</a>
+              <a class="social-link" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/youtube.svg" alt="YouTube icon">YouTube</a>
+              <a class="social-link" href="https://wa.me/237672996820?text=Hello%20sneakers.com!" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/whatsapp.svg" alt="WhatsApp icon">WhatsApp</a>
             </div>
           </div>
           <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #555;">
@@ -1094,12 +1546,15 @@
 
     // Utility Functions
     function filterProducts() {
+      const query = (state.searchQuery || '').trim().toLowerCase();
       return PRODUCTS.filter(p => {
         const genderMatch = state.filters.gender === 'all' || p.gender === state.filters.gender;
         const categoryMatch = state.filters.category === 'all' || p.category === state.filters.category;
         const priceMatch = parseFloat(p.price) <= state.filters.priceRange[1];
         const brandMatch = state.filters.brand === 'all' || p.brand === state.filters.brand;
-        return genderMatch && categoryMatch && priceMatch && brandMatch;
+        const text = `${p.brand} ${p.name} ${p.model} ${p.category}`.toLowerCase();
+        const queryMatch = !query || text.includes(query);
+        return genderMatch && categoryMatch && priceMatch && brandMatch && queryMatch;
       });
     }
 
@@ -1112,7 +1567,7 @@
     }
 
     function resetFilters() {
-      state.filters = { gender: 'all', category: 'all', priceRange: [0, 300], brand: 'all' };
+      state.filters = createDefaultFilters();
       render();
     }
 
@@ -1124,11 +1579,9 @@
     }
 
     function searchProducts() {
-      const query = document.getElementById('searchInput').value.toLowerCase();
-      if (query.trim()) {
-        setState({page: 'shop'});
-        // Filter would need to be enhanced to support search
-      }
+      const query = (document.getElementById('searchInput')?.value || '').trim().toLowerCase();
+      state.searchQuery = query;
+      setState({page: 'shop'});
     }
 
     function addToCart(productId) {
@@ -1190,6 +1643,7 @@
               <div class="detail-rating">⭐ ${product.rating} | ${product.reviews} reviews | In Stock</div>
               <div class="detail-price">$${product.price}</div>
               <p style="margin: 20px 0; color: #666;">${product.description}</p>
+              ${product.sourceUrl ? `<p style="margin: 0 0 16px; font-size: 12px;"><a href="${product.sourceUrl}" target="_blank" rel="noopener noreferrer">View source listing</a></p>` : ''}
               
               <div class="detail-options">
                 <div class="option-group">
@@ -1237,6 +1691,20 @@
             <input type="email" placeholder="Email" style="width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ddd;">
             <input type="password" placeholder="Password" style="width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ddd;">
             <button class="btn btn-primary" style="width: 100%; padding: 10px;" onclick="loginUser(); document.querySelector('.modal').remove();">Sign In</button>
+          </div>
+        `;
+      } else if (type === 'cookies') {
+        content = `
+          <h2>Cookie Settings</h2>
+          <p style="margin-top: 12px; color: #555; line-height: 1.6;">
+            We use a performance cookie to remember your page, search, and filter preferences to speed up repeat visits.
+          </p>
+          <p style="margin-top: 10px; color: #555; line-height: 1.6;">
+            You can update your choice below at any time.
+          </p>
+          <div style="display: flex; gap: 10px; margin-top: 20px;">
+            <button class="btn btn-primary" onclick="setCookieConsent('accepted'); document.querySelector('.modal')?.remove();">Accept Performance Cookie</button>
+            <button class="btn btn-secondary" onclick="setCookieConsent('rejected'); document.querySelector('.modal')?.remove();">Reject Non-Essential Cookie</button>
           </div>
         `;
       }
