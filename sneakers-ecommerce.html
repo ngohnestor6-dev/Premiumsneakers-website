@@ -76,6 +76,19 @@
     .filter-option { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer; }
     .filter-option input { cursor: pointer; }
     .filter-option label { font-size: 13px; cursor: pointer; }
+    .browse-shell { margin: 26px 0 40px; }
+    .browse-intro { background: white; border: 1px solid #ddd; border-radius: 6px; padding: 18px; margin-bottom: 18px; }
+    .browse-breadcrumb { font-size: 12px; color: #666; margin-bottom: 8px; }
+    .browse-intro h1 { font-size: 30px; margin-bottom: 8px; color: #232f3e; }
+    .browse-intro p { font-size: 14px; color: #666; }
+    .top-categories { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 14px; }
+    .top-category { background: #f8f8f8; border: 1px solid #ddd; border-radius: 6px; padding: 12px; cursor: pointer; transition: all 0.2s; }
+    .top-category:hover { border-color: #FF6B35; box-shadow: 0 3px 12px rgba(0,0,0,0.08); }
+    .top-category-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+    .top-category-meta { font-size: 11px; color: #666; }
+    .browse-grid { display: grid; grid-template-columns: 260px 1fr; gap: 20px; }
+    .browse-toolbar { background: white; border: 1px solid #ddd; border-radius: 6px; padding: 12px 14px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; gap: 14px; }
+    .browse-count { font-size: 13px; color: #444; }
     
     /* Sidebar */
     .sidebar-content { background: white; padding: 20px; border-radius: 4px; }
@@ -115,23 +128,34 @@
     .summary-row.total { font-size: 18px; font-weight: 700; border-top: 2px solid #ddd; padding-top: 12px; color: #FF6B35; }
     
     /* Footer */
-    footer { background: #232f3e; color: white; padding: 40px 20px; margin-top: 60px; }
-    .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; max-width: 1400px; margin: 0 auto; }
-    .footer-section h3 { margin-bottom: 15px; font-size: 14px; }
-    .footer-section a { display: block; color: #ccc; text-decoration: none; font-size: 12px; margin-bottom: 8px; cursor: pointer; transition: color 0.3s; }
-    .footer-section a:hover { color: #FF6B35; }
-    .reviews-strip { max-width: 1400px; margin: 0 auto 28px; }
-    .reviews-strip h3 { font-size: 16px; margin-bottom: 12px; }
-    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-    .review-card { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 8px; padding: 12px; }
-    .review-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-    .review-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255, 255, 255, 0.35); }
-    .review-name { font-size: 12px; font-weight: 700; }
-    .review-stars { color: #ffd24c; font-size: 12px; letter-spacing: 1px; }
-    .review-text { color: #d8dde3; font-size: 12px; line-height: 1.5; }
-    .social-link { display: flex !important; align-items: center; gap: 8px; }
-    .social-icon { width: 16px; height: 16px; display: inline-block; filter: brightness(0) saturate(100%) invert(82%) sepia(0%) saturate(0%) hue-rotate(145deg) brightness(89%) contrast(91%); transition: filter 0.3s; }
-    .social-link:hover .social-icon { filter: brightness(0) saturate(100%) invert(57%) sepia(93%) saturate(2157%) hue-rotate(337deg) brightness(100%) contrast(102%); }
+    footer { background: #232f3e; color: #e9edf3; margin-top: 60px; border-top: 1px solid #3b4656; }
+    .footer-shell { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+    .footer-newsletter { border-bottom: 1px solid #3b4656; padding: 22px 0; display: grid; grid-template-columns: 1.5fr 1fr; gap: 18px; align-items: center; }
+    .footer-newsletter h3 { font-size: 18px; margin-bottom: 6px; }
+    .footer-newsletter p { font-size: 13px; color: #b9c2cf; }
+    .newsletter-row { display: flex; gap: 8px; }
+    .newsletter-row input { flex: 1; min-width: 0; border: 1px solid #bbb; border-radius: 4px; padding: 10px 12px; font-size: 13px; }
+    .newsletter-row button { border-radius: 4px; }
+    .footer-perks { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 22px 0; border-bottom: 1px solid #3b4656; }
+    .perk-card { background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 14px; }
+    .perk-title { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+    .perk-text { font-size: 12px; color: #666; line-height: 1.5; }
+    .footer-connect { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 0; border-bottom: 1px solid #3b4656; }
+    .connect-label { font-size: 12px; font-weight: 700; letter-spacing: 0.7px; }
+    .connect-icons { display: flex; gap: 16px; align-items: center; }
+    .social-link { display: inline-flex !important; align-items: center; gap: 8px; color: #d8deea !important; text-decoration: none; font-size: 12px; }
+    .social-icon { width: 16px; height: 16px; display: inline-block; filter: brightness(0) saturate(100%) invert(90%) sepia(8%) saturate(208%) hue-rotate(179deg) brightness(98%) contrast(92%); transition: filter 0.2s; }
+    .social-link:hover { color: #E55A25 !important; }
+    .social-link:hover .social-icon { filter: brightness(0) saturate(100%) invert(43%) sepia(80%) saturate(1964%) hue-rotate(344deg) brightness(98%) contrast(89%); }
+    .footer-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; padding: 26px 0; border-bottom: 1px solid #3b4656; }
+    .footer-section h3 { margin-bottom: 10px; font-size: 12px; letter-spacing: 0.7px; font-weight: 800; color: #f2f5fa; }
+    .footer-section a { display: block; color: #c0c9d6; text-decoration: none; font-size: 12px; margin-bottom: 8px; cursor: pointer; }
+    .footer-section a:hover { color: #E55A25; text-decoration: underline; }
+    .footer-legal { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 0 24px; flex-wrap: wrap; }
+    .footer-legal-links { display: flex; gap: 14px; flex-wrap: wrap; }
+    .footer-legal-links a { color: #b9c2cf; font-size: 11px; text-decoration: none; }
+    .footer-legal-links a:hover { color: #E55A25; text-decoration: underline; }
+    .footer-copy { color: #b9c2cf; font-size: 11px; }
     
     /* Utilities */
     .hidden { display: none; }
@@ -144,8 +168,12 @@
     @media (max-width: 768px) {
       .product-detail-grid { grid-template-columns: 1fr; }
       .filters-section { grid-template-columns: 1fr; }
+      .browse-grid { grid-template-columns: 1fr; }
+      .top-categories { grid-template-columns: 1fr 1fr; }
+      .footer-newsletter { grid-template-columns: 1fr; }
+      .footer-perks { grid-template-columns: 1fr; }
+      .footer-connect { flex-direction: column; align-items: flex-start; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
-      .reviews-grid { grid-template-columns: 1fr; }
       .cookie-banner { left: 12px; right: 12px; bottom: 12px; flex-direction: column; align-items: flex-start; }
       .search-container { display: none; }
       .products-grid { grid-template-columns: repeat(2, 1fr); }
@@ -569,6 +597,7 @@
       },
       searchQuery: '',
       cookieConsent: null,
+      authToken: null,
       user: null,
       admin: null,
       orders: [],
@@ -579,6 +608,8 @@
 
     const PERF_COOKIE_NAME = 'sneakers_perf_v1';
     const CONSENT_COOKIE_NAME = 'sneakers_cookie_consent_v1';
+    const AUTH_TOKEN_KEY = 'sneakers_auth_token_v1';
+    const API_BASE = (window.SNEAKERS_API_BASE || 'http://localhost:5000/api').replace(/\/$/, '');
     const PERF_COOKIE_DAYS = 30;
     const PAGE_ALLOWLIST = new Set([
       'home', 'shop', 'cart', 'wishlist', 'account', 'orders', 'about', 'returns', 'checkout',
@@ -617,6 +648,108 @@
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
+    }
+
+    async function apiRequest(path, options = {}) {
+      const headers = { ...(options.headers || {}) };
+      if (!headers['Content-Type'] && options.body) headers['Content-Type'] = 'application/json';
+      if (state.authToken) headers.Authorization = `Bearer ${state.authToken}`;
+
+      const resp = await fetch(`${API_BASE}${path}`, { ...options, headers });
+      let data = null;
+      try {
+        data = await resp.json();
+      } catch (e) {
+        data = null;
+      }
+
+      if (!resp.ok) {
+        throw new Error((data && data.message) || 'Request failed');
+      }
+      return data;
+    }
+
+    function toDisplayCategory(value) {
+      const v = String(value || '').trim().toLowerCase();
+      const map = {
+        running: 'Running',
+        basketball: 'Basketball',
+        casual: 'Casual',
+        formal: 'Formal',
+        trail: 'Trail',
+        sport: 'Sport',
+        sports: 'Sport',
+        hiking: 'Trail'
+      };
+      return map[v] || (v ? `${v[0].toUpperCase()}${v.slice(1)}` : 'Casual');
+    }
+
+    function normalizeProduct(raw) {
+      const id = Number(raw.id);
+      const price = Number(raw.price);
+      const rating = Number(raw.rating);
+      return {
+        id: Number.isFinite(id) ? id : Math.floor(Math.random() * 100000),
+        brand: raw.brand || 'Generic',
+        name: raw.name || 'Unnamed Product',
+        model: raw.model || raw.name || 'Model',
+        price: Number.isFinite(price) ? price.toFixed(2) : '0.00',
+        image: raw.image || 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop',
+        rating: Number.isFinite(rating) ? rating.toFixed(1) : '4.0',
+        reviews: Number.isFinite(Number(raw.reviews)) ? Number(raw.reviews) : 80 + (id % 90),
+        gender: raw.gender || ['Men', 'Women', 'Kids'][id % 3],
+        category: toDisplayCategory(raw.category),
+        sizes: Array.isArray(raw.sizes) && raw.sizes.length ? raw.sizes : [6, 7, 8, 9, 10, 11, 12],
+        colors: Array.isArray(raw.colors) && raw.colors.length ? raw.colors : ['Black', 'White', 'Gray'],
+        description: raw.description || `${raw.name || 'Product'} by ${raw.brand || 'Generic'}.`,
+        inStock: raw.inStock !== false,
+        badge: raw.badge || null,
+        sourceUrl: raw.sourceUrl || null
+      };
+    }
+
+    function mapApiCartItems(items) {
+      return (items || []).map((item) => {
+        const p = PRODUCTS.find((x) => x.id === item.productId) || {};
+        return {
+          id: item.productId,
+          cartItemId: item.id,
+          name: item.name || p.name || 'Product',
+          price: Number(item.price || p.price || 0),
+          image: item.image || p.image || '',
+          qty: Number(item.quantity || item.qty || 1),
+          size: item.size || '',
+          color: item.color || (p.colors && p.colors[0]) || 'Default',
+          bgColor: p.bgColor,
+          emoji: p.emoji
+        };
+      });
+    }
+
+    async function syncProductsFromApi() {
+      const data = await apiRequest('/products');
+      const normalized = (data.products || []).map(normalizeProduct);
+      if (normalized.length) {
+        PRODUCTS.splice(0, PRODUCTS.length, ...normalized);
+      }
+    }
+
+    async function loadCartFromApi() {
+      if (!state.authToken) return;
+      const data = await apiRequest('/cart');
+      state.cart = mapApiCartItems(data.items);
+    }
+
+    async function loadOrdersFromApi() {
+      if (!state.authToken) return;
+      const data = await apiRequest('/orders');
+      state.orders = data.orders || [];
+    }
+
+    async function loadAdminOrdersFromApi() {
+      if (!state.authToken || !state.admin) return;
+      const data = await apiRequest('/admin/orders');
+      state.orders = data.orders || [];
     }
 
     function savePerformanceCookie() {
@@ -677,8 +810,41 @@
       }
     }
 
-    function init() {
+    async function hydrateAuthFromToken() {
+      const saved = localStorage.getItem(AUTH_TOKEN_KEY);
+      if (!saved) return;
+      state.authToken = saved;
+      try {
+        const me = await apiRequest('/auth/me');
+        if (me.role === 'admin') {
+          state.admin = { name: me.username, role: 'admin' };
+        } else {
+          state.user = { name: me.username, email: me.email };
+        }
+      } catch (err) {
+        state.authToken = null;
+        state.admin = null;
+        state.user = null;
+        localStorage.removeItem(AUTH_TOKEN_KEY);
+      }
+    }
+
+    async function init() {
       loadPerformanceCookie();
+      try {
+        await syncProductsFromApi();
+      } catch (err) {
+        console.warn('Product API unavailable, using bundled product data.');
+      }
+      await hydrateAuthFromToken();
+      if (state.authToken) {
+        try {
+          await Promise.all([loadCartFromApi(), loadOrdersFromApi()]);
+          if (state.admin) await loadAdminOrdersFromApi();
+        } catch (err) {
+          console.warn('Failed to hydrate account data:', err.message);
+        }
+      }
       render();
     }
 
@@ -725,14 +891,14 @@
         <div class="chat-widget">
           ${!state.chatOpen ? `
             <button class="chat-toggle" onclick="toggleChat()">
-              💬 Chat Support
+              &#128172; Chat Support
               ${state.messages.length > 0 ? '<span class="unread-badge">!</span>' : ''}
             </button>
           ` : `
             <div class="chat-container" style="width: 350px; height: 500px; position: fixed; bottom: 20px; right: 20px; background: white; border-radius: 8px; box-shadow: 0 5px 30px rgba(0,0,0,0.3); display: flex; flex-direction: column; z-index: 1000;">
               <div class="chat-header" style="background: #FF6B35; color: white; padding: 16px; border-radius: 8px 8px 0 0; display: flex; justify-content: space-between; align-items: center;">
                 <h4 style="margin: 0;">Customer Support</h4>
-                <button onclick="toggleChat()" style="background: none; border: none; color: white; cursor: pointer; font-size: 20px;">×</button>
+                <button onclick="toggleChat()" style="background: none; border: none; color: white; cursor: pointer; font-size: 20px;">&times;</button>
               </div>
               <div class="chat-messages" style="flex: 1; overflow-y: auto; padding: 16px; background: #f5f5f5;">
                 ${state.messages.length > 0 ? state.messages[state.messages.length - 1].messages.map(m => `
@@ -786,7 +952,7 @@
           const conv = state.messages[state.messages.length - 1];
           conv.messages.push({
             sender: 'admin',
-            text: '👋 Thanks for contacting support. Our team will assist you shortly!',
+            text: '&#128075; Thanks for contacting support. Our team will assist you shortly!',
             time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
           });
           render();
@@ -837,13 +1003,13 @@
               </div>
             </div>
             <div class="header-right">
-              <a class="header-link" onclick="setState({page: 'account'})">👤 ${state.user ? state.user.name : 'Account'}</a>
+              <a class="header-link" onclick="setState({page: 'account'})">&#128100; ${state.user ? state.user.name : 'Account'}</a>
               <a class="header-link cart-link" onclick="setState({page: 'cart'})">
-                🛒 Cart
+                &#128722; Cart
                 ${state.cart.length > 0 ? `<span class="cart-count">${state.cart.length}</span>` : ''}
               </a>
-              <a class="header-link" onclick="setState({page: 'wishlist'})">❤️ Wishlist (${state.wishlist.length})</a>
-              <a class="header-link" style="background: #FF6B35; color: white; padding: 6px 12px; border-radius: 4px;" onclick="setState({page: 'admin'})">📊 Admin</a>
+              <a class="header-link" onclick="setState({page: 'wishlist'})">&#9829; Wishlist (${state.wishlist.length})</a>
+              <a class="header-link" style="background: #FF6B35; color: white; padding: 6px 12px; border-radius: 4px;" onclick="setState({page: 'admin'})">&#128202; Admin</a>
             </div>
           </div>
         </header>
@@ -856,13 +1022,13 @@
           <div class="container">
             <button class="nav-btn ${state.page === 'home' ? 'active' : ''}" onclick="setState({page: 'home'})">Home</button>
             <button class="nav-btn ${state.page === 'shop' ? 'active' : ''}" onclick="setState({page: 'shop'})">Shop All</button>
-            <button class="nav-btn" onclick="setFilter('gender', 'Men')">👨 Men</button>
-            <button class="nav-btn" onclick="setFilter('gender', 'Women')">👩 Women</button>
-            <button class="nav-btn" onclick="setFilter('gender', 'Kids')">👶 Kids</button>
-            <button class="nav-btn" onclick="setFilter('category', 'Running')">🏃 Running</button>
-            <button class="nav-btn" onclick="setFilter('category', 'Basketball')">🏀 Basketball</button>
-            <button class="nav-btn" onclick="setFilter('category', 'Casual')">👟 Casual</button>
-            <button class="nav-btn ${state.page === 'deals' ? 'active' : ''}" onclick="setState({page: 'deals'})">🔥 Deals</button>
+            <button class="nav-btn" onclick="setFilter('gender', 'Men')">&#9794; Men</button>
+            <button class="nav-btn" onclick="setFilter('gender', 'Women')">&#9792; Women</button>
+            <button class="nav-btn" onclick="setFilter('gender', 'Kids')">&#128118; Kids</button>
+            <button class="nav-btn" onclick="setFilter('category', 'Running')">Running</button>
+            <button class="nav-btn" onclick="setFilter('category', 'Basketball')">Basketball</button>
+            <button class="nav-btn" onclick="setFilter('category', 'Casual')">Casual</button>
+            <button class="nav-btn ${state.page === 'deals' ? 'active' : ''}" onclick="setState({page: 'deals'})">Deals</button>
           </div>
         </div>
       `;
@@ -913,11 +1079,11 @@
               <h3>Admin Panel</h3>
               <p style="font-size: 12px; opacity: 0.8;">Welcome, ${state.admin.name}</p>
             </div>
-            <div class="admin-sidebar-item ${state.page === 'admin' ? 'active' : ''}" onclick="setState({page: 'admin'})">📊 Dashboard</div>
-            <div class="admin-sidebar-item ${state.page === 'admin-products' ? 'active' : ''}" onclick="setState({page: 'admin-products'})">📦 Products</div>
-            <div class="admin-sidebar-item ${state.page === 'admin-orders' ? 'active' : ''}" onclick="setState({page: 'admin-orders'})">📋 Orders</div>
-            <div class="admin-sidebar-item ${state.page === 'admin-chat' ? 'active' : ''}" onclick="setState({page: 'admin-chat'})">💬 Messages</div>
-            <div class="admin-sidebar-item" style="margin-top: 20px;" onclick="adminLogout()">🚪 Logout</div>
+            <div class="admin-sidebar-item ${state.page === 'admin' ? 'active' : ''}" onclick="setState({page: 'admin'})">Dashboard</div>
+            <div class="admin-sidebar-item ${state.page === 'admin-products' ? 'active' : ''}" onclick="setState({page: 'admin-products'})">Products</div>
+            <div class="admin-sidebar-item ${state.page === 'admin-orders' ? 'active' : ''}" onclick="setState({page: 'admin-orders'})">Orders</div>
+            <div class="admin-sidebar-item ${state.page === 'admin-chat' ? 'active' : ''}" onclick="setState({page: 'admin-chat'})">Messages</div>
+            <div class="admin-sidebar-item" style="margin-top: 20px;" onclick="adminLogout()">Logout</div>
           </div>
           <div class="admin-content">
             <h2>Dashboard Overview</h2>
@@ -973,11 +1139,11 @@
               <h3>Admin Panel</h3>
               <p style="font-size: 12px; opacity: 0.8;">Welcome, ${state.admin.name}</p>
             </div>
-            <div class="admin-sidebar-item" onclick="setState({page: 'admin'})">📊 Dashboard</div>
-            <div class="admin-sidebar-item active" onclick="setState({page: 'admin-products'})">📦 Products</div>
-            <div class="admin-sidebar-item" onclick="setState({page: 'admin-orders'})">📋 Orders</div>
-            <div class="admin-sidebar-item" onclick="setState({page: 'admin-chat'})">💬 Messages</div>
-            <div class="admin-sidebar-item" style="margin-top: 20px;" onclick="adminLogout()">🚪 Logout</div>
+            <div class="admin-sidebar-item" onclick="setState({page: 'admin'})">Dashboard</div>
+            <div class="admin-sidebar-item active" onclick="setState({page: 'admin-products'})">Products</div>
+            <div class="admin-sidebar-item" onclick="setState({page: 'admin-orders'})">Orders</div>
+            <div class="admin-sidebar-item" onclick="setState({page: 'admin-chat'})">Messages</div>
+            <div class="admin-sidebar-item" style="margin-top: 20px;" onclick="adminLogout()">Logout</div>
           </div>
           <div class="admin-content">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
@@ -1029,11 +1195,11 @@
               <h3>Admin Panel</h3>
               <p style="font-size: 12px; opacity: 0.8;">Welcome, ${state.admin.name}</p>
             </div>
-            <div class="admin-sidebar-item" onclick="setState({page: 'admin'})">📊 Dashboard</div>
-            <div class="admin-sidebar-item" onclick="setState({page: 'admin-products'})">📦 Products</div>
-            <div class="admin-sidebar-item active" onclick="setState({page: 'admin-orders'})">📋 Orders</div>
-            <div class="admin-sidebar-item" onclick="setState({page: 'admin-chat'})">💬 Messages</div>
-            <div class="admin-sidebar-item" style="margin-top: 20px;" onclick="adminLogout()">🚪 Logout</div>
+            <div class="admin-sidebar-item" onclick="setState({page: 'admin'})">Dashboard</div>
+            <div class="admin-sidebar-item" onclick="setState({page: 'admin-products'})">Products</div>
+            <div class="admin-sidebar-item active" onclick="setState({page: 'admin-orders'})">Orders</div>
+            <div class="admin-sidebar-item" onclick="setState({page: 'admin-chat'})">Messages</div>
+            <div class="admin-sidebar-item" style="margin-top: 20px;" onclick="adminLogout()">Logout</div>
           </div>
           <div class="admin-content">
             <h2>Order Management</h2>
@@ -1082,11 +1248,11 @@
               <h3>Admin Panel</h3>
               <p style="font-size: 12px; opacity: 0.8;">Welcome, ${state.admin.name}</p>
             </div>
-            <div class="admin-sidebar-item" onclick="setState({page: 'admin'})">📊 Dashboard</div>
-            <div class="admin-sidebar-item" onclick="setState({page: 'admin-products'})">📦 Products</div>
-            <div class="admin-sidebar-item" onclick="setState({page: 'admin-orders'})">📋 Orders</div>
-            <div class="admin-sidebar-item active" onclick="setState({page: 'admin-chat'})">💬 Messages</div>
-            <div class="admin-sidebar-item" style="margin-top: 20px;" onclick="adminLogout()">🚪 Logout</div>
+            <div class="admin-sidebar-item" onclick="setState({page: 'admin'})">Dashboard</div>
+            <div class="admin-sidebar-item" onclick="setState({page: 'admin-products'})">Products</div>
+            <div class="admin-sidebar-item" onclick="setState({page: 'admin-orders'})">Orders</div>
+            <div class="admin-sidebar-item active" onclick="setState({page: 'admin-chat'})">Messages</div>
+            <div class="admin-sidebar-item" style="margin-top: 20px;" onclick="adminLogout()">Logout</div>
           </div>
           <div class="admin-content">
             <h2>Customer Messages</h2>
@@ -1122,31 +1288,105 @@
     }
 
     function getHomePage() {
-      const featured = PRODUCTS.filter(p => p.badge === 'New').slice(0, 8);
-      const bestsellers = PRODUCTS.sort(() => Math.random() - 0.5).slice(0, 8);
-      
-      return `
-        <div class="banner">
-          <h1>Welcome to www.sneakers.com</h1>
-          <p>Discover Premium Shoes for Every Style & Season | Free Shipping on Orders $100+</p>
-        </div>
-        <div class="container">
-          <h2 class="mb-20">🆕 New Arrivals</h2>
-          <div class="products-grid">
-            ${featured.map(p => getProductCard(p)).join('')}
-          </div>
-          
-          <h2 class="mb-20" style="margin-top: 40px;">⭐ Best Sellers</h2>
-          <div class="products-grid">
-            ${bestsellers.map(p => getProductCard(p)).join('')}
-          </div>
+      const filtered = filterProducts();
+      const runningCount = PRODUCTS.filter(p => p.category === 'Running').length;
+      const basketballCount = PRODUCTS.filter(p => p.category === 'Basketball').length;
+      const casualCount = PRODUCTS.filter(p => p.category === 'Casual').length;
+      const trailCount = PRODUCTS.filter(p => p.category === 'Trail').length;
 
-          <div class="sidebar-content" style="margin-top: 40px;">
-            <h3>📧 Newsletter</h3>
-            <p style="margin-bottom: 12px; color: #666;">Get exclusive deals and updates</p>
-            <div style="display: flex; gap: 8px;">
-              <input type="email" placeholder="Enter your email" style="flex: 1; padding: 10px; border: 1px solid #ddd;" id="newsletterEmail">
-              <button class="btn btn-primary" onclick="subscribeNewsletter()" style="width: auto;">Subscribe</button>
+      return `
+        <div class="container">
+          <div class="browse-shell">
+            <div class="browse-intro">
+              <div class="browse-breadcrumb">Home / Shoes / Sneakers & Athletic Shoes</div>
+              <h1>Sneakers & Athletic Shoes</h1>
+              <p>Shop by category, compare top styles, and filter by brand, price, and gender.</p>
+              <div class="top-categories">
+                <div class="top-category" onclick="setFilter('category', 'Running')">
+                  <div class="top-category-title">Running</div>
+                  <div class="top-category-meta">${runningCount} styles</div>
+                </div>
+                <div class="top-category" onclick="setFilter('category', 'Basketball')">
+                  <div class="top-category-title">Basketball</div>
+                  <div class="top-category-meta">${basketballCount} styles</div>
+                </div>
+                <div class="top-category" onclick="setFilter('category', 'Casual')">
+                  <div class="top-category-title">Casual</div>
+                  <div class="top-category-meta">${casualCount} styles</div>
+                </div>
+                <div class="top-category" onclick="setFilter('category', 'Trail')">
+                  <div class="top-category-title">Trail</div>
+                  <div class="top-category-meta">${trailCount} styles</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="browse-grid">
+              <div class="filters">
+                <div class="filter-group">
+                  <div class="filter-title">Gender</div>
+                  <div class="filter-option">
+                    <input type="radio" name="home-gender" value="all" ${state.filters.gender === 'all' ? 'checked' : ''} onchange="setFilter('gender', 'all')">
+                    <label>All</label>
+                  </div>
+                  <div class="filter-option">
+                    <input type="radio" name="home-gender" value="Men" ${state.filters.gender === 'Men' ? 'checked' : ''} onchange="setFilter('gender', 'Men')">
+                    <label>Men</label>
+                  </div>
+                  <div class="filter-option">
+                    <input type="radio" name="home-gender" value="Women" ${state.filters.gender === 'Women' ? 'checked' : ''} onchange="setFilter('gender', 'Women')">
+                    <label>Women</label>
+                  </div>
+                  <div class="filter-option">
+                    <input type="radio" name="home-gender" value="Kids" ${state.filters.gender === 'Kids' ? 'checked' : ''} onchange="setFilter('gender', 'Kids')">
+                    <label>Kids</label>
+                  </div>
+                </div>
+
+                <div class="filter-group">
+                  <div class="filter-title">Category</div>
+                  ${['all', 'Running', 'Basketball', 'Casual', 'Formal', 'Trail', 'Sport'].map(cat => `
+                    <div class="filter-option">
+                      <input type="radio" name="home-category" value="${cat}" ${state.filters.category === cat ? 'checked' : ''} onchange="setFilter('category', '${cat}')">
+                      <label>${cat === 'all' ? 'All Categories' : cat}</label>
+                    </div>
+                  `).join('')}
+                </div>
+
+                <div class="filter-group">
+                  <div class="filter-title">Price Range</div>
+                  <input type="range" min="0" max="300" value="${state.filters.priceRange[1]}" onchange="setFilter('price', [0, this.value])" style="width: 100%;">
+                  <div style="margin-top: 8px; font-size: 13px;">$${state.filters.priceRange[0]} - $${state.filters.priceRange[1]}</div>
+                </div>
+
+                <div class="filter-group">
+                  <div class="filter-title">Brand</div>
+                  ${Object.keys(BRANDS).map(brand => `
+                    <div class="filter-option">
+                      <input type="radio" name="home-brand" value="${brand}" ${state.filters.brand === brand ? 'checked' : ''} onchange="setFilter('brand', '${brand}')">
+                      <label>${brand}</label>
+                    </div>
+                  `).join('')}
+                </div>
+
+                <button class="btn btn-primary" style="width: 100%;" onclick="resetFilters()">Reset Filters</button>
+              </div>
+
+              <div>
+                <div class="browse-toolbar">
+                  <div class="browse-count">Showing ${filtered.length} products</div>
+                  <select onchange="sortProducts(this.value)" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                    <option value="">Sort by: Featured</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="rating">Highest Rated</option>
+                    <option value="newest">Newest First</option>
+                  </select>
+                </div>
+                <div class="products-grid">
+                  ${filtered.slice(0, 24).map(p => getProductCard(p)).join('')}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1167,15 +1407,15 @@
                 </div>
                 <div class="filter-option">
                   <input type="radio" name="gender" value="Men" ${state.filters.gender === 'Men' ? 'checked' : ''} onchange="setFilter('gender', 'Men')">
-                  <label>👨 Men</label>
+                  <label>&#9794; Men</label>
                 </div>
                 <div class="filter-option">
                   <input type="radio" name="gender" value="Women" ${state.filters.gender === 'Women' ? 'checked' : ''} onchange="setFilter('gender', 'Women')">
-                  <label>👩 Women</label>
+                  <label>&#9792; Women</label>
                 </div>
                 <div class="filter-option">
                   <input type="radio" name="gender" value="Kids" ${state.filters.gender === 'Kids' ? 'checked' : ''} onchange="setFilter('gender', 'Kids')">
-                  <label>👶 Kids</label>
+                  <label>&#128118; Kids</label>
                 </div>
               </div>
 
@@ -1358,12 +1598,12 @@
           <h1 class="mb-20">My Account</h1>
           <div style="display: grid; grid-template-columns: 250px 1fr; gap: 20px;">
             <div style="background: white; padding: 20px; border-radius: 4px; height: fit-content;">
-              <div style="margin-bottom: 16px; font-weight: 600; cursor: pointer;" onclick="openModal('profile')">👤 Profile</div>
-              <div style="margin-bottom: 16px; font-weight: 600; cursor: pointer;" onclick="openModal('orders')">📦 My Orders</div>
-              <div style="margin-bottom: 16px; font-weight: 600; cursor: pointer;" onclick="setState({page: 'returns'})">↩️ Returns</div>
-              <div style="margin-bottom: 16px; font-weight: 600; cursor: pointer;" onclick="openModal('addresses')">📍 Addresses</div>
-              <div style="margin-bottom: 16px; font-weight: 600; cursor: pointer;" onclick="openModal('payment')">💳 Payment Methods</div>
-              <div style="margin-bottom: 16px; font-weight: 600; cursor: pointer;" onclick="logout()">🚪 Logout</div>
+              <div style="margin-bottom: 16px; font-weight: 600; cursor: pointer;" onclick="openModal('profile')">Profile</div>
+              <div style="margin-bottom: 16px; font-weight: 600; cursor: pointer;" onclick="openModal('orders')">My Orders</div>
+              <div style="margin-bottom: 16px; font-weight: 600; cursor: pointer;" onclick="setState({page: 'returns'})">Returns</div>
+              <div style="margin-bottom: 16px; font-weight: 600; cursor: pointer;" onclick="openModal('addresses')">Addresses</div>
+              <div style="margin-bottom: 16px; font-weight: 600; cursor: pointer;" onclick="openModal('payment')">Payment Methods</div>
+              <div style="margin-bottom: 16px; font-weight: 600; cursor: pointer;" onclick="logout()">Logout</div>
             </div>
             <div style="background: white; padding: 20px; border-radius: 4px;">
               <h3>Welcome to Your Account</h3>
@@ -1407,7 +1647,7 @@
       const deals = PRODUCTS.filter(p => p.badge === 'Sale').slice(0, 20);
       return `
         <div class="banner" style="background: linear-gradient(135deg, #FF6B35 0%, #232f3e 100%);">
-          <h1>🔥 Hot Deals & Discounts</h1>
+          <h1>Hot Deals & Discounts</h1>
           <p>Limited time offers on premium sneakers</p>
         </div>
         <div class="container">
@@ -1428,12 +1668,12 @@
             
             <h3 style="margin-top: 20px;">Why Choose Us?</h3>
             <ul style="margin-left: 20px; margin-top: 10px;">
-              <li>✅ 100% Authentic Products</li>
-              <li>✅ Free Shipping on Orders Over $100</li>
-              <li>✅ 30-Day Returns & Exchanges</li>
-              <li>✅ Expert Customer Support</li>
-              <li>✅ Price Match Guarantee</li>
-              <li>✅ Secure Checkout</li>
+              <li>&#10003; 100% Authentic Products</li>
+              <li>&#10003; Free Shipping on Orders Over $100</li>
+              <li>&#10003; 30-Day Returns & Exchanges</li>
+              <li>&#10003; Expert Customer Support</li>
+              <li>&#10003; Price Match Guarantee</li>
+              <li>&#10003; Secure Checkout</li>
             </ul>
 
             <h3 style="margin-top: 20px;">Contact Information</h3>
@@ -1455,11 +1695,11 @@
           <div class="product-info">
             <div class="product-brand">${product.brand}</div>
             <div class="product-name">${product.name}</div>
-            <div class="product-rating">⭐ ${product.rating} (${product.reviews} reviews)</div>
+            <div class="product-rating">&#9733; ${product.rating} (${product.reviews} reviews)</div>
             <div class="product-price">$${product.price}</div>
             <div class="product-actions">
               <button class="btn btn-primary" onclick="event.stopPropagation(); addToCart(${product.id})">Add</button>
-              <button class="btn btn-secondary" onclick="event.stopPropagation(); toggleWishlist(${product.id})" title="Add to Wishlist">❤️</button>
+              <button class="btn btn-secondary" onclick="event.stopPropagation(); toggleWishlist(${product.id})" title="Add to Wishlist">&#9829;</button>
             </div>
           </div>
         </div>
@@ -1469,76 +1709,98 @@
     function getFooter() {
       return `
         <footer>
-          <div class="reviews-strip">
-            <h3>Customer Reviews</h3>
-            <div class="reviews-grid">
-              <div class="review-card">
-                <div class="review-head">
-                  <img class="review-avatar" src="https://i.pravatar.cc/72?img=12" alt="Customer profile">
-                  <div>
-                    <div class="review-name">Grace M.</div>
-                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                  </div>
-                </div>
-                <p class="review-text">Fast delivery and the shoe fit was perfect. Quality feels premium.</p>
+          <div class="footer-shell">
+            <div class="footer-newsletter">
+              <div>
+                <h3>Get In On The Sneaker Drop</h3>
+                <p>Sign up for product launches, promos, and member-only rewards.</p>
               </div>
-              <div class="review-card">
-                <div class="review-head">
-                  <img class="review-avatar" src="https://i.pravatar.cc/72?img=32" alt="Customer profile">
-                  <div>
-                    <div class="review-name">Daniel K.</div>
-                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
-                  </div>
-                </div>
-                <p class="review-text">Great support and smooth checkout. I will order again next month.</p>
-              </div>
-              <div class="review-card">
-                <div class="review-head">
-                  <img class="review-avatar" src="https://i.pravatar.cc/72?img=47" alt="Customer profile">
-                  <div>
-                    <div class="review-name">Amina T.</div>
-                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                  </div>
-                </div>
-                <p class="review-text">Exactly what I expected from the photos. Very comfortable pair.</p>
+              <div class="newsletter-row">
+                <input type="email" id="newsletterEmailFooter" placeholder="Email address">
+                <button class="btn btn-primary" onclick="subscribeNewsletterFromFooter()">Sign Up</button>
               </div>
             </div>
-          </div>
-          <div class="footer-grid">
-            <div class="footer-section">
-              <h3>Customer Service</h3>
-              <a onclick="openModal('contact')">Contact Us</a>
-              <a onclick="openModal('faq')">FAQ & Help</a>
-              <a onclick="openModal('tracking')">Track Order</a>
-              <a onclick="setState({page: 'returns'})">Returns & Exchanges</a>
-              <a onclick="openModal('shipping')">Shipping Info</a>
+
+            <div class="footer-perks">
+              <div class="perk-card">
+                <div class="perk-title">Free In-Store Pickup</div>
+                <div class="perk-text">Grab your order quickly at your nearest location.</div>
+              </div>
+              <div class="perk-card">
+                <div class="perk-title">Free Shipping Over $75</div>
+                <div class="perk-text">Standard shipping is free when your cart qualifies.</div>
+              </div>
+              <div class="perk-card">
+                <div class="perk-title">Easy Returns</div>
+                <div class="perk-text">Simple return process designed for a hassle-free exchange.</div>
+              </div>
+              <div class="perk-card">
+                <div class="perk-title">Buy Now, Pay Later</div>
+                <div class="perk-text">Flexible payment options at checkout.</div>
+              </div>
             </div>
-            <div class="footer-section">
-              <h3>About Us</h3>
-              <a onclick="setState({page: 'about'})">About www.sneakers.com</a>
-              <a onclick="openModal('blog')">Blog</a>
-              <a onclick="openModal('careers')">Careers</a>
-              <a onclick="openModal('sustainability')">Sustainability</a>
+
+            <div class="footer-connect">
+              <div class="connect-label">CONNECT WITH US</div>
+              <div class="connect-icons">
+                <a class="social-link" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/facebook.svg" alt="Facebook icon">Facebook</a>
+                <a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/instagram.svg" alt="Instagram icon">Instagram</a>
+                <a class="social-link" href="https://x.com/" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/x.svg" alt="X icon">X</a>
+                <a class="social-link" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/youtube.svg" alt="YouTube icon">YouTube</a>
+                <a class="social-link" href="https://wa.me/237672996820?text=Hello%20sneakers.com!" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/whatsapp.svg" alt="WhatsApp icon">WhatsApp</a>
+              </div>
             </div>
-            <div class="footer-section">
-              <h3>Legal</h3>
-              <a onclick="openModal('privacy')">Privacy Policy</a>
-              <a onclick="openModal('terms')">Terms of Service</a>
-              <a onclick="openModal('cookies')">Cookie Settings</a>
-              <a onclick="openModal('disclaimer')">Disclaimer</a>
+
+            <div class="footer-grid">
+              <div class="footer-section">
+                <h3>POPULAR CATEGORIES</h3>
+                <a onclick="setFilter('category', 'Running')">Running Shoes</a>
+                <a onclick="setFilter('category', 'Basketball')">Basketball Shoes</a>
+                <a onclick="setFilter('category', 'Casual')">Casual Sneakers</a>
+                <a onclick="setFilter('category', 'Trail')">Trail Shoes</a>
+                <a onclick="setState({page: 'shop'})">All Sneakers</a>
+              </div>
+              <div class="footer-section">
+                <h3>STORES</h3>
+                <a onclick="openModal('find-store')">Find A Store</a>
+                <a onclick="openModal('pickup')">Store Pickup</a>
+                <a onclick="openModal('hours')">Store Hours</a>
+                <a onclick="openModal('events')">Store Events</a>
+              </div>
+              <div class="footer-section">
+                <h3>REWARDS</h3>
+                <a onclick="openModal('rewards')">Loyalty Program</a>
+                <a onclick="openModal('gift-cards')">Gift Cards</a>
+                <a onclick="openModal('members')">Member Perks</a>
+                <a onclick="openModal('offers')">Latest Offers</a>
+              </div>
+              <div class="footer-section">
+                <h3>HELP</h3>
+                <a onclick="openModal('contact')">Contact Us</a>
+                <a onclick="openModal('faq')">FAQ</a>
+                <a onclick="openModal('tracking')">Track Order</a>
+                <a onclick="setState({page: 'returns'})">Returns & Exchanges</a>
+                <a onclick="openModal('shipping')">Shipping Info</a>
+              </div>
+              <div class="footer-section">
+                <h3>ABOUT</h3>
+                <a onclick="setState({page: 'about'})">About sneakers.com</a>
+                <a onclick="openModal('careers')">Careers</a>
+                <a onclick="openModal('sustainability')">Sustainability</a>
+                <a onclick="openModal('blog')">Blog</a>
+              </div>
             </div>
-            <div class="footer-section">
-              <h3>Follow Us</h3>
-              <a class="social-link" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/facebook.svg" alt="Facebook icon">Facebook</a>
-              <a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/instagram.svg" alt="Instagram icon">Instagram</a>
-              <a class="social-link" href="https://x.com/" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/x.svg" alt="X icon">X</a>
-              <a class="social-link" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/youtube.svg" alt="YouTube icon">YouTube</a>
-              <a class="social-link" href="https://wa.me/237672996820?text=Hello%20sneakers.com!" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/whatsapp.svg" alt="WhatsApp icon">WhatsApp</a>
+
+            <div class="footer-legal">
+              <div class="footer-legal-links">
+                <a onclick="openModal('terms')">Terms of Use</a>
+                <a onclick="openModal('privacy')">Privacy Policy</a>
+                <a onclick="openModal('cookies')">Cookie Settings</a>
+                <a onclick="openModal('disclaimer')">Accessibility</a>
+                <a onclick="openModal('do-not-sell')">Do Not Sell My Info</a>
+              </div>
+              <div class="footer-copy">&copy; 2026 sneakers.com. All rights reserved.</div>
             </div>
-          </div>
-          <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #555;">
-            <p>&copy; 2026 www.sneakers.com. All rights reserved.</p>
-            <p style="font-size: 12px; margin-top: 10px;">Secure Shopping | Free Returns | Fast Shipping</p>
           </div>
         </footer>
       `;
@@ -1563,7 +1825,7 @@
       if (type === 'category') state.filters.category = value;
       if (type === 'price') state.filters.priceRange = value;
       if (type === 'brand') state.filters.brand = value;
-      setState({page: 'shop'});
+      setState({page: state.page === 'home' ? 'home' : 'shop'});
     }
 
     function resetFilters() {
@@ -1584,35 +1846,61 @@
       setState({page: 'shop'});
     }
 
-    function addToCart(productId) {
+    async function addToCart(productId) {
       const product = PRODUCTS.find(p => p.id === productId);
       if (!product) return;
 
-      const cartItem = {
-        ...product,
-        qty: 1,
-        size: product.sizes[0],
-        color: product.colors[0]
-      };
-
-      const existing = state.cart.find(item => item.id === productId);
-      if (existing) {
-        existing.qty += 1;
-      } else {
-        state.cart.push(cartItem);
+      if (!state.authToken) {
+        alert('Sign in first to add items to cart.');
+        setState({ page: 'account' });
+        return;
       }
-      alert('✅ Added to cart!');
-      render();
+
+      try {
+        await apiRequest('/cart', {
+          method: 'POST',
+          body: JSON.stringify({
+            productId: product.id,
+            quantity: 1,
+            size: (product.sizes && product.sizes[0]) || ''
+          })
+        });
+        await loadCartFromApi();
+        alert('Item added to cart.');
+        render();
+      } catch (err) {
+        alert(err.message || 'Unable to add to cart');
+      }
     }
 
-    function removeCartItem(index) {
-      state.cart.splice(index, 1);
-      render();
+    async function removeCartItem(index) {
+      if (!state.authToken) return;
+      const item = state.cart[index];
+      if (!item || !item.cartItemId) return;
+      try {
+        await apiRequest(`/cart/${item.cartItemId}`, { method: 'DELETE' });
+        await loadCartFromApi();
+        render();
+      } catch (err) {
+        alert(err.message || 'Unable to remove item');
+      }
     }
 
-    function updateCartItem(index, qty) {
-      state.cart[index].qty = Math.max(1, parseInt(qty));
-      render();
+    async function updateCartItem(index, qty) {
+      if (!state.authToken) return;
+      const item = state.cart[index];
+      if (!item || !item.cartItemId) return;
+      const nextQty = Math.max(1, parseInt(qty, 10) || 1);
+      try {
+        await apiRequest(`/cart/${item.cartItemId}`, {
+          method: 'PUT',
+          body: JSON.stringify({ quantity: nextQty })
+        });
+        await loadCartFromApi();
+        render();
+      } catch (err) {
+        alert(err.message || 'Unable to update quantity');
+      }
     }
 
     function toggleWishlist(productId) {
@@ -1640,7 +1928,7 @@
             <div class="detail-image" style="background-image: url('${product.image}')"></div>
             <div class="detail-info">
               <h1>${product.name}</h1>
-              <div class="detail-rating">⭐ ${product.rating} | ${product.reviews} reviews | In Stock</div>
+              <div class="detail-rating">&#9733; ${product.rating} | ${product.reviews} reviews | In Stock</div>
               <div class="detail-price">$${product.price}</div>
               <p style="margin: 20px 0; color: #666;">${product.description}</p>
               ${product.sourceUrl ? `<p style="margin: 0 0 16px; font-size: 12px;"><a href="${product.sourceUrl}" target="_blank" rel="noopener noreferrer">View source listing</a></p>` : ''}
@@ -1669,8 +1957,8 @@
                 <h4>Customer Reviews</h4>
                 ${REVIEWS_DATA.slice(0, 3).map(r => `
                   <div style="margin-bottom: 16px;">
-                    <div style="font-weight: 600;">${r.author} ${r.verified ? '✓' : ''}</div>
-                    <div style="color: #ffc107; font-size: 12px;">⭐ ${r.rating}/5</div>
+                    <div style="font-weight: 600;">${r.author} ${r.verified ? '&#10003;' : ''}</div>
+                    <div style="color: #ffc107; font-size: 12px;">&#9733; ${r.rating}/5</div>
                     <p style="font-size: 13px; color: #666; margin-top: 4px;">"${r.text}"</p>
                   </div>
                 `).join('')}
@@ -1688,9 +1976,11 @@
         content = `
           <h2>Sign In</h2>
           <div style="margin-top: 20px;">
-            <input type="email" placeholder="Email" style="width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ddd;">
-            <input type="password" placeholder="Password" style="width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ddd;">
-            <button class="btn btn-primary" style="width: 100%; padding: 10px;" onclick="loginUser(); document.querySelector('.modal').remove();">Sign In</button>
+            <input id="loginUsername" type="text" placeholder="Username" style="width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ddd;">
+            <input id="loginPassword" type="password" placeholder="Password" style="width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ddd;">
+            <input id="registerEmail" type="email" placeholder="Email (for new account)" style="width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ddd;">
+            <button class="btn btn-primary" style="width: 100%; padding: 10px;" onclick="loginUser()">Sign In</button>
+            <button class="btn btn-secondary" style="width: 100%; padding: 10px; margin-top: 8px;" onclick="registerUser()">Create Account</button>
           </div>
         `;
       } else if (type === 'cookies') {
@@ -1706,6 +1996,26 @@
             <button class="btn btn-primary" onclick="setCookieConsent('accepted'); document.querySelector('.modal')?.remove();">Accept Performance Cookie</button>
             <button class="btn btn-secondary" onclick="setCookieConsent('rejected'); document.querySelector('.modal')?.remove();">Reject Non-Essential Cookie</button>
           </div>
+        `;
+      } else if (type === 'terms') {
+        content = `
+          <h2>Terms of Use</h2>
+          <p style="margin-top: 12px; color: #555; line-height: 1.6;">By using this website, you agree to use it lawfully and provide accurate account and checkout information.</p>
+          <p style="margin-top: 10px; color: #555; line-height: 1.6;">All product images, text, and branding are protected content and may not be reused without written permission.</p>
+          <p style="margin-top: 10px; color: #555; line-height: 1.6;">Orders are subject to availability and verification. We may cancel fraudulent or duplicate orders.</p>
+        `;
+      } else if (type === 'privacy') {
+        content = `
+          <h2>Privacy Policy</h2>
+          <p style="margin-top: 12px; color: #555; line-height: 1.6;">We collect only information required to process orders, support your account, and improve site performance.</p>
+          <p style="margin-top: 10px; color: #555; line-height: 1.6;">Your data is never sold. Payment data should be processed by secure payment providers in production.</p>
+          <p style="margin-top: 10px; color: #555; line-height: 1.6;">You may request account data updates or deletion by contacting support.</p>
+        `;
+      } else if (type === 'disclaimer') {
+        content = `
+          <h2>Accessibility</h2>
+          <p style="margin-top: 12px; color: #555; line-height: 1.6;">We are improving usability for keyboard, screen-reader, and low-vision users across the site.</p>
+          <p style="margin-top: 10px; color: #555; line-height: 1.6;">If you need support using this site, contact us and we will provide assistance promptly.</p>
         `;
       }
       
@@ -1725,36 +2035,69 @@
       render();
     }
 
-    function placeOrder(e) {
+    async function placeOrder(e) {
       e.preventDefault();
-      const orderId = Math.random().toString(36).substr(2, 9).toUpperCase();
-      state.orders.push({
-        id: orderId,
-        date: new Date().toLocaleDateString(),
-        total: state.cart.reduce((sum, item) => sum + (parseFloat(item.price) * item.qty), 0),
-        items: state.cart.length,
-        status: 'Processing'
-      });
-      state.cart = [];
-      alert(`✅ Order ${orderId} placed successfully!`);
-      setState({page: 'home'});
+      if (!state.authToken) {
+        alert('Please sign in before checkout.');
+        setState({ page: 'account' });
+        return;
+      }
+
+      const customerName = String(document.querySelector('input[placeholder=\"Full Name\"]')?.value || '').trim();
+      const email = String(document.querySelector('input[placeholder=\"Email\"]')?.value || '').trim();
+      const address1 = String(document.querySelector('input[placeholder=\"Street Address\"]')?.value || '').trim();
+      const city = String(document.querySelector('input[placeholder=\"City\"]')?.value || '').trim();
+      const postal = String(document.querySelector('input[placeholder=\"Postal Code\"]')?.value || '').trim();
+      const paymentMethod = String(document.querySelector('select[required]')?.value || '').trim();
+
+      try {
+        const data = await apiRequest('/checkout', {
+          method: 'POST',
+          body: JSON.stringify({
+            customerName,
+            email,
+            address: `${address1}, ${city} ${postal}`.trim(),
+            paymentMethod
+          })
+        });
+        await Promise.all([loadCartFromApi(), loadOrdersFromApi()]);
+        alert(`Order ${data.order.id} created.`);
+        setState({ page: 'home' });
+      } catch (err) {
+        alert(err.message || 'Checkout failed');
+      }
     }
 
     // ADMIN AUTHENTICATION
-    function adminLogin() {
+    async function adminLogin() {
       const username = document.getElementById('adminUsername')?.value;
       const password = document.getElementById('adminPassword')?.value;
-
-      if (username === 'Machala' && password === 'MACHALA#2024') {
-        state.admin = { name: 'Administrator', role: 'admin' };
+      try {
+        const data = await apiRequest('/auth/login', {
+          method: 'POST',
+          body: JSON.stringify({ username, password })
+        });
+        if (!data.user || data.user.role !== 'admin') {
+          alert('Admin access required.');
+          return;
+        }
+        state.authToken = data.token;
+        localStorage.setItem(AUTH_TOKEN_KEY, data.token);
+        state.admin = { name: data.user.username, role: 'admin' };
+        state.user = null;
+        await Promise.all([syncProductsFromApi(), loadAdminOrdersFromApi(), loadCartFromApi()]);
         setState({ page: 'admin' });
-      } else {
-        alert('Invalid credentials.');
+      } catch (err) {
+        alert(err.message || 'Invalid credentials.');
       }
     }
 
     function adminLogout() {
+      state.authToken = null;
       state.admin = null;
+      state.orders = [];
+      state.cart = [];
+      localStorage.removeItem(AUTH_TOKEN_KEY);
       setState({ page: 'home' });
     }
 
@@ -1828,7 +2171,7 @@
       document.body.appendChild(modal);
     }
 
-    function addNewProduct() {
+    async function addNewProduct() {
       const brand = document.getElementById('newBrand')?.value;
       const model = document.getElementById('newModel')?.value;
       const price = parseFloat(document.getElementById('newPrice')?.value);
@@ -1842,41 +2185,46 @@
         return;
       }
 
-      const newProduct = {
-        id: PRODUCTS.length + 1,
-        brand: brand,
-        name: brand + ' ' + model,
-        model: model,
-        price: price,
-        image: image,
-        rating: 4.5,
-        reviews: 0,
-        gender: gender,
-        category: category,
-        sizes: [6, 7, 8, 9, 10, 11, 12, 13, 14],
-        colors: ['Black', 'White', 'Red', 'Blue', 'Gray'],
-        description: desc,
-        inStock: true,
-        badge: 'New'
-      };
-
-      PRODUCTS.push(newProduct);
-      alert('✅ Product added successfully!');
-      closeModal();
-      render();
+      try {
+        await apiRequest('/admin/products', {
+          method: 'POST',
+          body: JSON.stringify({
+            brand,
+            name: `${brand} ${model}`,
+            model,
+            price,
+            image,
+            rating: 4.5,
+            reviews: 0,
+            gender,
+            category,
+            sizes: [6, 7, 8, 9, 10, 11, 12, 13, 14],
+            colors: ['Black', 'White', 'Red', 'Blue', 'Gray'],
+            description: desc || `${brand} ${model}`
+          })
+        });
+        await syncProductsFromApi();
+        alert('Product added successfully.');
+        closeModal();
+        render();
+      } catch (err) {
+        alert(err.message || 'Could not add product');
+      }
     }
 
     function editProduct(id) {
       alert('Edit feature coming soon');
     }
 
-    function deleteProduct(id) {
+    async function deleteProduct(id) {
       if (confirm('Are you sure you want to delete this product?')) {
-        const index = PRODUCTS.findIndex(p => p.id === id);
-        if (index > -1) {
-          PRODUCTS.splice(index, 1);
-          alert('✅ Product deleted');
+        try {
+          await apiRequest(`/admin/products/${id}`, { method: 'DELETE' });
+          await syncProductsFromApi();
+          alert('Product deleted');
           render();
+        } catch (err) {
+          alert(err.message || 'Delete failed');
         }
       }
     }
@@ -1894,14 +2242,23 @@
       }
     }
 
-    function updateOrderStatus(orderId) {
+    async function updateOrderStatus(orderId) {
       const statuses = ['Processing', 'Shipped', 'In Transit', 'Delivered'];
       const order = state.orders.find(o => o.id === orderId);
       if (order) {
         const currentIndex = statuses.indexOf(order.status);
-        order.status = statuses[(currentIndex + 1) % statuses.length];
-        alert(`✅ Order status updated to: ${order.status}`);
-        render();
+        const nextStatus = statuses[(currentIndex + 1) % statuses.length];
+        try {
+          await apiRequest(`/admin/orders/${orderId}/status`, {
+            method: 'PATCH',
+            body: JSON.stringify({ status: nextStatus })
+          });
+          await loadAdminOrdersFromApi();
+          alert(`Order status updated to: ${nextStatus}`);
+          render();
+        } catch (err) {
+          alert(err.message || 'Status update failed');
+        }
       }
     }
 
@@ -1931,19 +2288,84 @@
       render();
     }
 
-    function loginUser() {
-      state.user = { name: 'Guest User', email: 'user@example.com' };
-      render();
+    async function loginUser() {
+      const username = String(document.getElementById('loginUsername')?.value || '').trim();
+      const password = String(document.getElementById('loginPassword')?.value || '');
+      try {
+        const data = await apiRequest('/auth/login', {
+          method: 'POST',
+          body: JSON.stringify({ username, password })
+        });
+        state.authToken = data.token;
+        localStorage.setItem(AUTH_TOKEN_KEY, data.token);
+        if (data.user.role === 'admin') {
+          state.admin = { name: data.user.username, role: 'admin' };
+          state.user = null;
+          await loadAdminOrdersFromApi();
+          document.querySelector('.modal')?.remove();
+          setState({ page: 'admin' });
+          return;
+        }
+        state.admin = null;
+        state.user = { name: data.user.username, email: data.user.email };
+        await Promise.all([loadCartFromApi(), loadOrdersFromApi()]);
+        document.querySelector('.modal')?.remove();
+        setState({ page: 'home' });
+      } catch (err) {
+        alert(err.message || 'Login failed');
+      }
     }
 
+    async function registerUser() {
+      const username = String(document.getElementById('loginUsername')?.value || '').trim();
+      const password = String(document.getElementById('loginPassword')?.value || '');
+      const emailInput = String(document.getElementById('registerEmail')?.value || '').trim();
+      const email = emailInput || `${username.toLowerCase().replace(/\s+/g, '')}@example.com`;
+
+      if (!username || !password) {
+        alert('Enter a username and password to create an account.');
+        return;
+      }
+      try {
+        await apiRequest('/auth/register', {
+          method: 'POST',
+          body: JSON.stringify({ username, email, password })
+        });
+
+        const loginData = await apiRequest('/auth/login', {
+          method: 'POST',
+          body: JSON.stringify({ username, password })
+        });
+
+        state.authToken = loginData.token;
+        localStorage.setItem(AUTH_TOKEN_KEY, loginData.token);
+        state.admin = null;
+        state.user = { name: loginData.user.username, email: loginData.user.email };
+        await Promise.all([loadCartFromApi(), loadOrdersFromApi()]);
+        document.querySelector('.modal')?.remove();
+        setState({ page: 'home' });
+      } catch (err) {
+        alert(err.message || 'Registration failed');
+      }
+    }
     function logout() {
+      state.authToken = null;
       state.user = null;
+      state.admin = null;
+      state.cart = [];
+      state.orders = [];
+      localStorage.removeItem(AUTH_TOKEN_KEY);
       render();
     }
 
     function subscribeNewsletter() {
       const email = document.getElementById('newsletterEmail').value;
-      if (email) alert(`✅ Subscribed! Check ${email} for exclusive deals.`);
+      if (email) alert(`&#10003; Subscribed! Check ${email} for exclusive deals.`);
+    }
+
+    function subscribeNewsletterFromFooter() {
+      const email = document.getElementById('newsletterEmailFooter')?.value || '';
+      if (email.trim()) alert(`&#10003; Subscribed! Check ${email.trim()} for exclusive deals.`);
     }
 
     function attachEventListeners() {}
@@ -1952,3 +2374,11 @@
   </script>
 </body>
 </html>
+
+
+
+
+
+
+
+

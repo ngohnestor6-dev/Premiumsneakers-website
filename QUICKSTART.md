@@ -1,102 +1,94 @@
 # Quick Start Guide
 
-## 5-Minute Setup
-
-### Step 1: Start Backend (Terminal 1)
+## 1) Start Backend
 ```bash
 cd backend
 npm install
 npm start
 ```
-Wait for: "Shoe Store Backend running on http://localhost:5000"
+Backend runs on `http://localhost:5000`.
 
-### Step 2: Start Frontend (Terminal 2)
+## 2) Start Frontend
+Use either app entry:
+- `sneakers-ecommerce.html` (single-page storefront)
+- `frontend/index.html` (legacy frontend folder)
+
+For local serving:
 ```bash
-cd frontend
-python -m http.server 3000
-# OR
+# from project root
 npx http-server -p 3000
+# or
+python -m http.server 3000
 ```
+Open `http://localhost:3000`.
 
-### Step 3: Open Browser
-Visit: http://localhost:3000
-
-## Testing the Application
-
-1. **Shop Page** - Browse shoes (auto-loads from backend)
-2. **View Details** - Click any shoe to see full details
-3. **Add to Cart** - Select size, quantity, click "Add to Cart"
-4. **Go to Cart** - Click cart icon in header
-5. **Checkout** - Click "Proceed to Checkout"
-6. **Place Order** - Fill form and place order
-7. **Confirmation** - See order confirmation page
-
-## Key Endpoints to Test
-
+## 3) Verify API Health
 ```bash
-# Get all shoes
-curl http://localhost:5000/api/shoes
-
-# Get specific shoe
-curl http://localhost:5000/api/shoes/1
-
-# Get cart
-curl http://localhost:5000/api/cart
-
-# Health check
 curl http://localhost:5000/api/health
 ```
+Expected: `{ "status": "ok", ... }`
 
-## Troubleshooting
-
-| Issue | Solution |
-|-------|----------|
-| Backend fails to start | Port 5000 in use. Change PORT in server.js or close other app |
-| CORS errors | Backend not running. Make sure it's on port 5000 |
-| No shoes loading | Check backend console for errors. Verify API is running |
-| Can't find frontend | Make sure you're on http://localhost:3000 |
-
-## File Structure
-
+## 3.1) Run Automated Smoke Test
+```bash
+cd backend
+npm run smoke
 ```
-tupac project/
-├── README.md                 # Full documentation
-├── QUICKSTART.md            # This file
-├── backend/
-│   ├── server.js            # All backend logic
-│   ├── package.json         # Dependencies
-│   └── node_modules/        # Created by npm install
-└── frontend/
-    ├── index.html           # HTML page
-    ├── app.js               # React components
-    └── styles.css           # Styling
+This validates health, register, login, products, cart, and checkout.
+
+## 3.2) Run Environment Preflight
+```bash
+cd backend
+npm run preflight
+```
+This validates required env settings and warns about risky defaults.
+
+## 4) Auth / Admin Access
+- Admin username: `Machala`
+- Admin password: `MACHALA#2024`
+
+Customer flow:
+- Click `Sign In`
+- Use `Create Account` to register
+- Then login and shop/checkout
+
+## 5) Core API Endpoints
+```bash
+# Auth
+POST /api/auth/register
+POST /api/auth/login
+GET  /api/auth/me
+
+# Products
+GET  /api/products
+GET  /api/products/:id
+
+# Cart (auth required)
+GET    /api/cart
+POST   /api/cart
+PUT    /api/cart/:itemId
+DELETE /api/cart/:itemId
+
+# Checkout / Orders
+POST /api/checkout
+GET  /api/orders
+
+# Admin
+POST   /api/admin/products
+PUT    /api/admin/products/:id
+DELETE /api/admin/products/:id
+GET    /api/admin/orders
+PATCH  /api/admin/orders/:id/status
 ```
 
-## What's Included
+## 6) Common Issues
+- `EADDRINUSE` on backend start: port `5000` already used.
+- Frontend loads but actions fail: check `API_BASE` in `sneakers-ecommerce.html` is `http://localhost:5000/api`.
+- Login works but admin page not opening: ensure account role is `admin`.
 
-### Backend Features
-✅ 6 demo shoes with ratings  
-✅ Shopping cart management  
-✅ Order processing  
-✅ REST API endpoints  
-✅ CORS enabled  
-
-### Frontend Features
-✅ Modern UI with animations  
-✅ Product browsing  
-✅ Shopping cart  
-✅ Checkout form  
-✅ Order confirmation  
-✅ Responsive design  
-✅ Real-time cart updates  
-
-## Next Steps
-
-After getting it working, you can:
-- Add more shoes to `backend/server.js`
-- Customize styling in `frontend/styles.css`
-- Add database (MongoDB, PostgreSQL)
-- Add authentication
-- Deploy to production
-
-Enjoy building! 🚀
+## 7) Production Notes
+Before hosting:
+- Set `TOKEN_SECRET` and `FRONTEND_ORIGIN` in backend environment.
+- Configure `PAYMENT_PROVIDER` and `EMAIL_PROVIDER`.
+- Use HTTPS + secure cookie/session strategy.
+- Replace JSON file storage with a real database.
+- Integrate real payment and email providers (current implementation is placeholder/mock).

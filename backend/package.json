@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "preflight": "node scripts/preflight.js",
+    "smoke": "node scripts/smoke-test.js"
   },
   "keywords": ["express", "shoes", "ecommerce", "api"],
   "author": "",
