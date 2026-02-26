@@ -631,8 +631,31 @@
     const PERF_COOKIE_NAME = 'sneakers_perf_v1';
     const CONSENT_COOKIE_NAME = 'sneakers_cookie_consent_v1';
     const AUTH_TOKEN_KEY = 'sneakers_auth_token_v1';
-    const API_BASE = (window.SNEAKERS_API_BASE || 'http://localhost:5000/api').replace(/\/$/, '');
+    const API_BASE_KEY = 'sneakers_api_base_v1';
     const PERF_COOKIE_DAYS = 30;
+
+    function resolveApiBase() {
+      const params = new URLSearchParams(window.location.search);
+      const fromQuery = String(params.get('api') || '').trim();
+      if (fromQuery) {
+        localStorage.setItem(API_BASE_KEY, fromQuery.replace(/\/$/, ''));
+        return fromQuery.replace(/\/$/, '');
+      }
+
+      const fromStorage = String(localStorage.getItem(API_BASE_KEY) || '').trim();
+      if (fromStorage) return fromStorage.replace(/\/$/, '');
+
+      const fromWindow = String(window.SNEAKERS_API_BASE || '').trim();
+      if (fromWindow) return fromWindow.replace(/\/$/, '');
+
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        return 'http://localhost:5000/api';
+      }
+
+      return '';
+    }
+
+    const API_BASE = resolveApiBase();
     const PAGE_ALLOWLIST = new Set([
       'home', 'shop', 'cart', 'wishlist', 'account', 'orders', 'about', 'help', 'returns', 'checkout',
       'admin', 'admin-products', 'admin-orders', 'admin-chat'
@@ -683,11 +706,21 @@
     }
 
     async function apiRequest(path, options = {}) {
+      if (!API_BASE) {
+        throw new Error('Backend API is not configured. Deploy backend, then open with ?api=https://your-backend-domain/api');
+      }
+
       const headers = { ...(options.headers || {}) };
       if (!headers['Content-Type'] && options.body) headers['Content-Type'] = 'application/json';
       if (state.authToken) headers.Authorization = `Bearer ${state.authToken}`;
 
-      const resp = await fetch(`${API_BASE}${path}`, { ...options, headers });
+      let resp;
+      try {
+        resp = await fetch(`${API_BASE}${path}`, { ...options, headers });
+      } catch (e) {
+        throw new Error(`Cannot reach backend API at ${API_BASE}.`);
+      }
+
       let data = null;
       try {
         data = await resp.json();
