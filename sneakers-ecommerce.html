@@ -637,6 +637,16 @@
       'home', 'shop', 'cart', 'wishlist', 'account', 'orders', 'about', 'help', 'returns', 'checkout',
       'admin', 'admin-products', 'admin-orders', 'admin-chat'
     ]);
+    const ADMIN_PAGES = new Set(['admin', 'admin-products', 'admin-orders', 'admin-chat']);
+
+    function hasAdminPageHint() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('admin') === '1';
+    }
+
+    function canAccessAdminPages() {
+      return Boolean(state.admin) || hasAdminPageHint();
+    }
 
     function createDefaultFilters() {
       return { gender: 'all', category: 'all', priceRange: [0, 300], brand: 'all' };
@@ -867,6 +877,9 @@
           console.warn('Failed to hydrate account data:', err.message);
         }
       }
+      if (hasAdminPageHint()) {
+        state.page = 'admin';
+      }
       render();
     }
 
@@ -1017,7 +1030,7 @@
                 ${state.cart.length > 0 ? `<span class="cart-count">${state.cart.length}</span>` : ''}
               </a>
               <a class="header-link" onclick="setState({page: 'wishlist'})">&#9829; Wishlist (${state.wishlist.length})</a>
-              <a class="header-link" style="background: #FF6B35; color: white; padding: 6px 12px; border-radius: 4px;" onclick="setState({page: 'admin'})">&#128202; Admin</a>
+              ${state.admin ? `<a class="header-link" style="background: #FF6B35; color: white; padding: 6px 12px; border-radius: 4px;" onclick="setState({page: 'admin'})">&#128202; Admin</a>` : ''}
             </div>
           </div>
         </header>
@@ -1044,6 +1057,7 @@
     }
 
     function getPageContent() {
+      if (ADMIN_PAGES.has(state.page) && !canAccessAdminPages()) return getHomePage();
       if (state.page === 'home') return getHomePage();
       if (state.page === 'shop') return getShopPage();
       if (state.page === 'product') return getProductPage();
@@ -2250,7 +2264,12 @@
     }
 
     function setState(newState) {
-      state = { ...state, ...newState };
+      const merged = { ...state, ...newState };
+      const isAdminNow = Boolean(merged.admin);
+      if (ADMIN_PAGES.has(merged.page) && !(isAdminNow || hasAdminPageHint())) {
+        merged.page = 'home';
+      }
+      state = merged;
       render();
     }
 
